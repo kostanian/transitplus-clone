@@ -979,7 +979,7 @@ ul, ol {
   opacity: 0.55;
   z-index: 1;
   pointer-events: none;
-  transform: translateX(clamp(40px, 6vw, 120px));
+  transform: translateX(clamp(80px, 12vw, 240px));
 }
 
 
