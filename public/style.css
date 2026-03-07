@@ -1259,7 +1259,13 @@ ul, ol {
 
   .about__grid {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: 40px;
+  }
+
+  .about__image {
+    max-height: 300px;
+    aspect-ratio: 16/9;
+    order: -1;
   }
 
   .services__grid {
