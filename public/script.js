@@ -42,19 +42,49 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  /* ========== UTILITY: Reveal animation helper ========== */
+  function reveal(selector, fromVars, triggerEl, staggerVal) {
+    const elements = document.querySelectorAll(selector);
+    if (!elements.length) return;
+
+    gsap.set(elements, { opacity: 1, clearProps: 'transform' }); // ensure visible by default
+
+    gsap.fromTo(elements,
+      { opacity: 0, ...fromVars },
+      {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        scale: 1,
+        duration: 0.8,
+        ease: 'power3.out',
+        stagger: staggerVal || 0,
+        scrollTrigger: {
+          trigger: triggerEl || elements[0],
+          start: 'top 85%',
+          toggleActions: 'play none none none'
+        }
+      }
+    );
+  }
+
   /* ========== HERO ANIMATIONS ========== */
+  // Hero elements start with opacity:0 in CSS
   const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
   heroTl
-    .to('.hero__label', { opacity: 1, y: 0, duration: 0.8 })
-    .to('.hero__title', { opacity: 1, y: 0, duration: 1 }, '-=0.5')
-    .to('.hero__subtitle', { opacity: 1, y: 0, duration: 0.8 }, '-=0.6')
-    .to('.hero__actions', { opacity: 1, y: 0, duration: 0.7 }, '-=0.4');
-
-  // Set initial states
-  gsap.set(['.hero__label', '.hero__title', '.hero__subtitle', '.hero__actions'], {
-    y: 40
-  });
+    .fromTo('.hero__label',
+      { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 0.8 })
+    .fromTo('.hero__title',
+      { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 1 }, '-=0.5')
+    .fromTo('.hero__subtitle',
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.8 }, '-=0.6')
+    .fromTo('.hero__actions',
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.7 }, '-=0.4');
 
   // Hero parallax on scroll
   gsap.to('.hero__bg-img', {
@@ -69,91 +99,70 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ========== ABOUT SECTION ========== */
-  gsap.from('.about__text > *', {
-    scrollTrigger: {
-      trigger: '.about',
-      start: 'top 75%',
-      toggleActions: 'play none none none'
-    },
-    y: 40,
-    opacity: 0,
-    duration: 0.8,
-    stagger: 0.15
-  });
+  reveal('.about__text > *', { y: 40 }, '.about', 0.15);
 
-  gsap.from('.about__image', {
-    scrollTrigger: {
-      trigger: '.about',
-      start: 'top 70%',
-      toggleActions: 'play none none none'
-    },
-    x: 60,
-    opacity: 0,
-    duration: 1,
-    ease: 'power3.out'
-  });
+  gsap.fromTo('.about__image',
+    { opacity: 0, x: 60 },
+    {
+      opacity: 1, x: 0, duration: 1, ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.about',
+        start: 'top 70%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
 
-  gsap.from('.about__stat', {
-    scrollTrigger: {
-      trigger: '.about__stats',
-      start: 'top 85%',
-      toggleActions: 'play none none none'
-    },
-    y: 30,
-    opacity: 0,
-    duration: 0.6,
-    stagger: 0.2
-  });
+  reveal('.about__stat', { y: 30 }, '.about__stats', 0.2);
 
   /* ========== SERVICES SECTION ========== */
-  gsap.from('.service-card', {
-    scrollTrigger: {
-      trigger: '.services__grid',
-      start: 'top 80%',
-      toggleActions: 'play none none none'
-    },
-    y: 50,
-    opacity: 0,
-    duration: 0.7,
-    stagger: {
-      each: 0.1,
-      grid: [2, 3],
-      from: 'start'
-    },
-    ease: 'power3.out'
-  });
+  gsap.fromTo('.service-card',
+    { opacity: 0, y: 50 },
+    {
+      opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
+      stagger: { each: 0.1, grid: [2, 3], from: 'start' },
+      scrollTrigger: {
+        trigger: '.services__grid',
+        start: 'top 85%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
 
   /* ========== ADVANTAGES SECTION ========== */
-  gsap.from('.advantage-item', {
-    scrollTrigger: {
-      trigger: '.advantages__grid',
-      start: 'top 80%',
-      toggleActions: 'play none none none'
-    },
-    y: 40,
-    opacity: 0,
-    duration: 0.6,
-    stagger: 0.1,
-    ease: 'power3.out'
-  });
+  gsap.fromTo('.advantage-item',
+    { opacity: 0, y: 40 },
+    {
+      opacity: 1, y: 0, duration: 0.6, ease: 'power3.out',
+      stagger: 0.1,
+      scrollTrigger: {
+        trigger: '.advantages__grid',
+        start: 'top 85%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
 
   /* ========== PROCESS TIMELINE ========== */
   const steps = document.querySelectorAll('.process__step');
   const lineFill = document.getElementById('processLineFill');
 
   if (steps.length && lineFill) {
+    // Make step content visible initially
+    gsap.set('.process__step-content', { opacity: 1 });
+
     // Timeline progress with ScrollTrigger
     ScrollTrigger.create({
       trigger: '.process__timeline',
-      start: 'top 60%',
-      end: 'bottom 60%',
+      start: 'top 70%',
+      end: 'bottom 50%',
       scrub: 0.5,
       onUpdate: (self) => {
         const progress = self.progress;
         lineFill.style.height = `${progress * 100}%`;
 
         steps.forEach((step, i) => {
-          const stepProgress = (i + 0.5) / steps.length;
+          const stepProgress = (i + 0.3) / steps.length;
           if (progress >= stepProgress) {
             step.classList.add('active');
           } else {
@@ -164,18 +173,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Stagger reveal for step content
-    gsap.from('.process__step-content', {
-      scrollTrigger: {
-        trigger: '.process__timeline',
-        start: 'top 70%',
-        toggleActions: 'play none none none'
-      },
-      x: -30,
-      opacity: 0,
-      duration: 0.7,
-      stagger: 0.15,
-      ease: 'power3.out'
-    });
+    gsap.fromTo('.process__step-content',
+      { opacity: 0, x: -30 },
+      {
+        opacity: 1, x: 0, duration: 0.7, ease: 'power3.out',
+        stagger: 0.15,
+        scrollTrigger: {
+          trigger: '.process__timeline',
+          start: 'top 80%',
+          toggleActions: 'play none none none'
+        }
+      }
+    );
   }
 
   /* ========== GEOGRAPHY SECTION ========== */
@@ -191,113 +200,109 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  gsap.from('.geography__city', {
-    scrollTrigger: {
-      trigger: '.geography__cities',
-      start: 'top 80%',
-      toggleActions: 'play none none none'
-    },
-    scale: 0.8,
-    opacity: 0,
-    duration: 0.5,
-    stagger: 0.08,
-    ease: 'back.out(1.7)'
-  });
+  gsap.fromTo('.geography__city',
+    { opacity: 0, scale: 0.8 },
+    {
+      opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.7)',
+      stagger: 0.08,
+      scrollTrigger: {
+        trigger: '.geography__cities',
+        start: 'top 85%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
 
-  gsap.from('.geography__route', {
-    scrollTrigger: {
-      trigger: '.geography__routes',
-      start: 'top 85%',
-      toggleActions: 'play none none none'
-    },
-    x: -30,
-    opacity: 0,
-    duration: 0.6,
-    stagger: 0.15
-  });
+  gsap.fromTo('.geography__route',
+    { opacity: 0, x: -30 },
+    {
+      opacity: 1, x: 0, duration: 0.6,
+      stagger: 0.15,
+      scrollTrigger: {
+        trigger: '.geography__routes',
+        start: 'top 90%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
 
   /* ========== CASES SECTION ========== */
-  gsap.from('.case-card', {
-    scrollTrigger: {
-      trigger: '.cases__grid',
-      start: 'top 80%',
-      toggleActions: 'play none none none'
-    },
-    y: 50,
-    opacity: 0,
-    duration: 0.7,
-    stagger: 0.1,
-    ease: 'power3.out'
-  });
+  gsap.fromTo('.case-card',
+    { opacity: 0, y: 50 },
+    {
+      opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
+      stagger: 0.1,
+      scrollTrigger: {
+        trigger: '.cases__grid',
+        start: 'top 85%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
 
   /* ========== CTA SECTION ========== */
-  gsap.from('.cta-block', {
-    scrollTrigger: {
-      trigger: '.cta-section',
-      start: 'top 75%',
-      toggleActions: 'play none none none'
-    },
-    scale: 0.95,
-    opacity: 0,
-    duration: 1,
-    ease: 'power3.out'
-  });
+  gsap.fromTo('.cta-block',
+    { opacity: 0, scale: 0.95 },
+    {
+      opacity: 1, scale: 1, duration: 1, ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.cta-section',
+        start: 'top 80%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
 
   // Rotating circles decoration
   gsap.to('.cta-block__circle--1', {
-    rotation: 360,
-    duration: 30,
-    repeat: -1,
-    ease: 'none'
+    rotation: 360, duration: 30, repeat: -1, ease: 'none'
   });
 
   gsap.to('.cta-block__circle--2', {
-    rotation: -360,
-    duration: 20,
-    repeat: -1,
-    ease: 'none'
+    rotation: -360, duration: 20, repeat: -1, ease: 'none'
   });
 
   /* ========== CONTACTS SECTION ========== */
-  gsap.from('.contacts__channel', {
-    scrollTrigger: {
-      trigger: '.contacts__channels',
-      start: 'top 80%',
-      toggleActions: 'play none none none'
-    },
-    x: -30,
-    opacity: 0,
-    duration: 0.6,
-    stagger: 0.1
-  });
+  gsap.fromTo('.contacts__channel',
+    { opacity: 0, x: -30 },
+    {
+      opacity: 1, x: 0, duration: 0.6,
+      stagger: 0.1,
+      scrollTrigger: {
+        trigger: '.contacts__channels',
+        start: 'top 85%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
 
-  gsap.from('.contacts__form', {
-    scrollTrigger: {
-      trigger: '.contacts__form',
-      start: 'top 80%',
-      toggleActions: 'play none none none'
-    },
-    y: 40,
-    opacity: 0,
-    duration: 0.8,
-    ease: 'power3.out'
-  });
+  gsap.fromTo('.contacts__form',
+    { opacity: 0, y: 40 },
+    {
+      opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.contacts__form',
+        start: 'top 85%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
 
   /* ========== SECTION LABELS & TITLES ========== */
   document.querySelectorAll('.section-label, .section-title').forEach(el => {
-    if (el.closest('.hero') || el.closest('.geography')) return; // skip hero & geography (handled separately)
+    if (el.closest('.hero') || el.closest('.geography')) return;
 
-    gsap.from(el, {
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 85%',
-        toggleActions: 'play none none none'
-      },
-      y: 30,
-      opacity: 0,
-      duration: 0.8,
-      ease: 'power3.out'
-    });
+    gsap.fromTo(el,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 90%',
+          toggleActions: 'play none none none'
+        }
+      }
+    );
   });
 
   /* ========== FORM SUBMISSION ========== */
@@ -316,4 +321,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 2500);
     });
   }
+
+  /* ========== REFRESH ON LOAD ========== */
+  window.addEventListener('load', () => {
+    ScrollTrigger.refresh();
+  });
 });
