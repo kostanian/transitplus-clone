@@ -975,7 +975,7 @@ ul, ol {
 .geography__map-bg {
   position: absolute;
   inset: 0;
-  background: url('/images/map-bg.jpg') center/cover no-repeat;
+  background: url('/images/map-bg.jpg') center/contain no-repeat;
   opacity: 0.5;
   z-index: 1;
 }
