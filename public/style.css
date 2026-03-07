@@ -974,25 +974,21 @@ ul, ol {
 
 .geography__map-bg {
   position: absolute;
-  top: 24px;
-  bottom: 24px;
-  right: 0;
-  left: 35%;
+  inset: 24px 0;
   background: url('/images/map-bg.jpg') center center / contain no-repeat;
   opacity: 0.55;
   z-index: 1;
   pointer-events: none;
+  transform: translateX(20%);
 }
 
 /* City dots overlay */
 .geography__cities-overlay {
   position: absolute;
-  top: 24px;
-  bottom: 24px;
-  right: 0;
-  left: 35%;
+  inset: 24px 0;
   z-index: 3;
   pointer-events: none;
+  transform: translateX(20%);
 }
 
 .city-dot {
