@@ -482,9 +482,8 @@ document.addEventListener('DOMContentLoaded', () => {
     bottom: 0.95
   };
 
-  // Global corrections for city markers.
+  // Global correction for city markers.
   const CITY_DOTS_SHIFT_X_PX = 56;
-  const MAP_LAYER_SHIFT_X_PX = 140;
 
   function positionCityDots() {
     const overlay = document.getElementById('citiesOverlay');
