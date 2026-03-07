@@ -975,11 +975,11 @@ ul, ol {
 .geography__map-bg {
   position: absolute;
   inset: 24px 0;
-  background: url('/images/map-bg.png') right center / contain no-repeat;
+  background: url('/images/map-bg.png') right center / 85% auto no-repeat;
   opacity: 0.55;
   z-index: 1;
   pointer-events: none;
-  transform: translateX(clamp(80px, 12vw, 240px));
+  transform: translateX(clamp(40px, 8vw, 160px));
 }
 
 
