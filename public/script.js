@@ -482,9 +482,9 @@ document.addEventListener('DOMContentLoaded', () => {
     bottom: 0.95
   };
 
-  // Global horizontal correction: shifts all city markers to the right.
-  // ~56px is visually close to 1–2 cm on common desktop displays.
+  // Global corrections for city markers.
   const CITY_DOTS_SHIFT_X_PX = 56;
+  const MAP_LAYER_SHIFT_X_PX = 140;
 
   function positionCityDots() {
     const overlay = document.getElementById('citiesOverlay');
@@ -506,7 +506,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (containerRatio > imgRatio) {
       imgH = containerH;
       imgW = containerH * imgRatio;
-      imgOffX = (containerW - imgW) / 2;
+      imgOffX = (containerW - imgW) / 2 + MAP_LAYER_SHIFT_X_PX;
       imgOffY = 0;
     } else {
       imgW = containerW;
