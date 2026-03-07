@@ -981,6 +981,71 @@ ul, ol {
   pointer-events: none;
 }
 
+/* City dots overlay */
+.geography__cities-overlay {
+  position: absolute;
+  inset: 24px 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.city-dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  pointer-events: all;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.city-dot::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(212, 175, 55, 0.3);
+  animation: city-pulse 2s ease-in-out infinite;
+}
+
+.city-dot::after {
+  content: attr(data-city);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  transform: translateX(-50%) scale(0.7);
+  white-space: nowrap;
+  background: rgba(10, 14, 26, 0.9);
+  border: 1px solid var(--color-accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 5px 12px;
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.city-dot:hover {
+  transform: translate(-50%, -50%) scale(1.6);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
+}
+
+.city-dot:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+@keyframes city-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.8); opacity: 0; }
+}
+
 /* Routes */
 .geography__routes {
   display: flex;
