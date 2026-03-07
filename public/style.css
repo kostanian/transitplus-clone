@@ -488,9 +488,9 @@ ul, ol {
   z-index: 2;
 }
 
-/* Russia = left edge of infinity (SVG x=200 of 1000 = 20%) */
+/* Russia = left edge (SVG x=200 of 1000 = 15%) */
 .infinity-node--ru {
-  left: 20%;
+  left: 15%;
   top: 50%;
 }
 
@@ -500,9 +500,9 @@ ul, ol {
   top: 50%;
 }
 
-/* Kazakhstan = right edge of infinity (SVG x=800 of 1000 = 80%) */
+/* Kazakhstan = right edge (SVG x=800 of 1000 = 85%) */
 .infinity-node--kz {
-  left: 80%;
+  left: 85%;
   top: 50%;
 }
 
