@@ -506,7 +506,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (containerRatio > imgRatio) {
       imgH = containerH;
       imgW = containerH * imgRatio;
-      imgOffX = (containerW - imgW) / 2;
+      imgOffX = (containerW - imgW) / 2 + MAP_LAYER_SHIFT_X_PX;
       imgOffY = 0;
     } else {
       imgW = containerW;
