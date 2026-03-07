@@ -454,9 +454,9 @@ ul, ol {
 .hero__infinity {
   position: relative;
   width: 100%;
-  max-width: 700px;
-  height: 280px;
-  margin-bottom: 40px;
+  max-width: 800px;
+  height: 300px;
+  margin: 0 auto 40px;
   opacity: 0;
 }
 
@@ -483,14 +483,14 @@ ul, ol {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   transform: translate(-50%, -50%);
   z-index: 2;
 }
 
-/* Russia = left loop center (SVG x=150 of 1000 = 15%) */
+/* Russia = left loop (SVG x=250 of 1000 = 25%) */
 .infinity-node--ru {
-  left: 15%;
+  left: 25%;
   top: 50%;
 }
 
@@ -500,37 +500,37 @@ ul, ol {
   top: 50%;
 }
 
-/* Kazakhstan = right loop center (SVG x=850 of 1000 = 85%) */
+/* Kazakhstan = right loop (SVG x=750 of 1000 = 75%) */
 .infinity-node--kz {
-  left: 85%;
+  left: 75%;
   top: 50%;
 }
 
 .infinity-node__circle {
-  width: 52px;
-  height: 52px;
+  width: 68px;
+  height: 68px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 26px;
+  font-size: 34px;
   backdrop-filter: blur(10px);
   transition: all 0.4s;
 }
 
 .infinity-node__circle--main {
-  width: 64px;
-  height: 64px;
-  font-size: 32px;
+  width: 80px;
+  height: 80px;
+  font-size: 40px;
   border-color: var(--color-accent);
   background: rgba(201, 168, 76, 0.15);
   box-shadow: 0 0 40px rgba(201, 168, 76, 0.25), 0 0 80px rgba(201, 168, 76, 0.1);
 }
 
 .infinity-node__label {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1.5px;
