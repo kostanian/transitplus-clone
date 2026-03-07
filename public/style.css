@@ -488,21 +488,21 @@ ul, ol {
   z-index: 2;
 }
 
-/* Russia = left loop center (SVG x=200 of 800 = 25%) */
+/* Russia = left loop center (SVG x=150 of 1000 = 15%) */
 .infinity-node--ru {
-  left: 25%;
+  left: 15%;
   top: 50%;
 }
 
-/* China = center crossing (SVG x=400 of 800 = 50%) */
+/* China = center crossing (SVG x=500 of 1000 = 50%) */
 .infinity-node--cn {
   left: 50%;
   top: 50%;
 }
 
-/* Kazakhstan = right loop center (SVG x=600 of 800 = 75%) */
+/* Kazakhstan = right loop center (SVG x=850 of 1000 = 85%) */
 .infinity-node--kz {
-  left: 75%;
+  left: 85%;
   top: 50%;
 }
 
