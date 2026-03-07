@@ -419,6 +419,35 @@ ul, ol {
   opacity: 0;
 }
 
+.hero__routes {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+  opacity: 0;
+}
+
+.hero__route-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-sm);
+  padding: 8px 16px;
+  backdrop-filter: blur(8px);
+}
+
+.hero__route-arrow {
+  font-size: 20px;
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
 .hero__actions {
   display: flex;
   gap: 16px;
