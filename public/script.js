@@ -89,23 +89,54 @@ document.addEventListener('DOMContentLoaded', () => {
       { opacity: 0, y: 30 },
       { opacity: 1, y: 0, duration: 0.7 }, '-=0.3');
 
-  /* Infinity loop flowing icons animation */
+  /* Infinity loop — animate icons along the SVG path */
+  const infinityPath = document.getElementById('infinityPath');
   const flowIcons = document.querySelectorAll('.flow-icon');
-  if (flowIcons.length) {
+
+  if (infinityPath && flowIcons.length) {
+    // Get the SVG path d attribute to use as offset-path
+    const pathD = infinityPath.getAttribute('d');
+    const svgEl = infinityPath.closest('svg');
+    const svgRect = svgEl.getBoundingClientRect();
+    const containerRect = document.querySelector('.hero__infinity').getBoundingClientRect();
+
+    // Calculate scale factors
+    const viewBox = svgEl.viewBox.baseVal;
+    const scaleX = containerRect.width / viewBox.width;
+    const scaleY = containerRect.height / viewBox.height;
+
+    // Animate each icon using MotionPathPlugin fallback — manually sample path
+    const pathLen = infinityPath.getTotalLength();
+    const totalIcons = flowIcons.length;
+
     flowIcons.forEach((icon, i) => {
-      const duration = 6 + (i % 3);
-      const startOffset = (i / flowIcons.length) * 100;
-      gsap.set(icon, { opacity: 0.7 });
-      gsap.fromTo(icon,
-        { offsetDistance: startOffset + '%' },
-        {
-          offsetDistance: (startOffset + 100) + '%',
-          duration: duration,
-          repeat: -1,
-          ease: 'none',
-          delay: i * 0.5
+      const startPercent = i / totalIcons;
+      const duration = 8000; // ms per full loop
+
+      function animateIcon() {
+        const startTime = performance.now() - (startPercent * duration);
+
+        function step(now) {
+          const elapsed = (now - startTime) % duration;
+          const progress = elapsed / duration;
+          const point = infinityPath.getPointAtLength(progress * pathLen);
+
+          // Map SVG coords to container coords
+          const x = point.x * scaleX;
+          const y = point.y * scaleY;
+
+          icon.style.left = x + 'px';
+          icon.style.top = y + 'px';
+          icon.style.transform = 'translate(-50%, -50%)';
+          icon.style.opacity = '0.85';
+
+          requestAnimationFrame(step);
         }
-      );
+
+        requestAnimationFrame(step);
+      }
+
+      animateIcon();
     });
   }
 
