@@ -975,10 +975,11 @@ ul, ol {
 .geography__map-bg {
   position: absolute;
   inset: 24px 0;
-  background: url('/images/map-bg.jpg') calc(50% + var(--geography-map-shift-x, 140px)) center / contain no-repeat;
+  background: url('/images/map-bg.jpg') center center / contain no-repeat;
   opacity: 0.55;
   z-index: 1;
   pointer-events: none;
+  transform: translateX(clamp(40px, 7vw, 140px));
 }
 
 /* City dots overlay */
@@ -987,6 +988,7 @@ ul, ol {
   inset: 24px 0;
   z-index: 3;
   pointer-events: none;
+  transform: translateX(clamp(40px, 7vw, 140px));
 }
 
 .city-dot {
