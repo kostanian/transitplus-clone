@@ -82,12 +82,40 @@ document.addEventListener('DOMContentLoaded', () => {
     .fromTo('.hero__subtitle',
       { opacity: 0, y: 30 },
       { opacity: 1, y: 0, duration: 0.8 }, '-=0.6')
-    .fromTo('.hero__routes',
+    .fromTo('.hero__infinity',
       { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.7 }, '-=0.4')
+      { opacity: 1, y: 0, duration: 0.8 }, '-=0.4')
     .fromTo('.hero__actions',
       { opacity: 0, y: 30 },
       { opacity: 1, y: 0, duration: 0.7 }, '-=0.3');
+
+  /* Infinity loop flowing icons animation */
+  const flowIcons = document.querySelectorAll('.flow-icon');
+  if (flowIcons.length) {
+    flowIcons.forEach((icon, i) => {
+      const duration = 6 + (i % 3);
+      const startOffset = (i / flowIcons.length) * 100;
+      gsap.set(icon, { opacity: 0.7 });
+      gsap.fromTo(icon,
+        { offsetDistance: startOffset + '%' },
+        {
+          offsetDistance: (startOffset + 100) + '%',
+          duration: duration,
+          repeat: -1,
+          ease: 'none',
+          delay: i * 0.5
+        }
+      );
+    });
+  }
+
+  /* Infinity glow stroke animation */
+  const infinityGlow = document.getElementById('infinityGlow');
+  if (infinityGlow) {
+    const len = infinityGlow.getTotalLength();
+    gsap.set(infinityGlow, { strokeDasharray: len * 0.3 + ' ' + len * 0.7, strokeDashoffset: len });
+    gsap.to(infinityGlow, { strokeDashoffset: -len, duration: 5, repeat: -1, ease: 'none' });
+  }
 
   // Hero parallax on scroll
   gsap.to('.hero__bg-img', {
