@@ -979,7 +979,6 @@ ul, ol {
   opacity: 0.55;
   z-index: 1;
   pointer-events: none;
-  transform: translateX(clamp(40px, 7vw, 140px));
 }
 
 /* City dots overlay */
