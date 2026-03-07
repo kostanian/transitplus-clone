@@ -109,23 +109,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const pathLen = infinityPath.getTotalLength();
     const totalIcons = flowIcons.length;
 
-    // Flag centers in SVG coordinates
+    // Flag centers in SVG coordinates (matching wider layout)
     const flagCenters = [
-      { x: 200, y: 150, selector: '.infinity-node--ru .infinity-node__circle' },
+      { x: 150, y: 150, selector: '.infinity-node--ru .infinity-node__circle' },
       { x: 500, y: 150, selector: '.infinity-node--cn .infinity-node__circle' },
-      { x: 800, y: 150, selector: '.infinity-node--kz .infinity-node__circle' }
+      { x: 850, y: 150, selector: '.infinity-node--kz .infinity-node__circle' }
     ];
-    const flagRadius = 55; // SVG units — hide zone
+    const flagRadius = 55;
 
-    // Icon sets: each icon alternates between two emojis when passing through a flag
-    const iconSets = ['📦', '💰', '🚛', '📦', '💰', '🚛'];
-    const altIcons  = ['🏭', '💎', '✈️', '🏭', '💎', '✈️'];
+    // Pool of all possible icons — each icon picks randomly on exit
+    const allIcons = ['📦', '💰', '🚛', '🏭', '💎', '✈️', '🛳️', '📋', '⚙️', '🔧'];
 
-    // Track state per icon
-    const iconState = flowIcons.length ? Array.from(flowIcons).map((_, i) => ({
-      insideFlag: -1, // which flag index (-1 = none)
-      useAlt: false
-    })) : [];
+    function randomIcon(exclude) {
+      let pick;
+      do { pick = allIcons[Math.floor(Math.random() * allIcons.length)]; } while (pick === exclude);
+      return pick;
+    }
+
+    // Initialize each icon with a random emoji (offset so neighbors differ)
+    const iconState = Array.from(flowIcons).map((icon, i) => {
+      const emoji = allIcons[i % allIcons.length];
+      icon.textContent = emoji;
+      return { insideFlag: -1, currentEmoji: emoji };
+    });
 
     // Track glow state per flag
     const flagGlowCount = [0, 0, 0];
@@ -134,7 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
     flowIcons.forEach((icon, i) => {
       const startPercent = i / totalIcons;
       const duration = 8000;
-      icon.textContent = iconSets[i];
 
       const startTime = performance.now() - (startPercent * duration);
 
@@ -158,14 +163,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const state = iconState[i];
 
         if (currentFlag >= 0 && state.insideFlag !== currentFlag) {
-          // Entered a new flag zone
           state.insideFlag = currentFlag;
           flagGlowCount[currentFlag]++;
           if (flagElements[currentFlag]) {
             flagElements[currentFlag].classList.add('glow');
           }
         } else if (currentFlag < 0 && state.insideFlag >= 0) {
-          // Exited a flag zone — swap icon
           const prevFlag = state.insideFlag;
           flagGlowCount[prevFlag]--;
           if (flagGlowCount[prevFlag] <= 0) {
@@ -175,8 +178,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           }
           state.insideFlag = -1;
-          state.useAlt = !state.useAlt;
-          icon.textContent = state.useAlt ? altIcons[i] : iconSets[i];
+          // Pick a random NEW icon on exit
+          state.currentEmoji = randomIcon(state.currentEmoji);
+          icon.textContent = state.currentEmoji;
         }
 
         // Hide icon inside flag zones
