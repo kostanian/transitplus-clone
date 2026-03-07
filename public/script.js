@@ -16,6 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const burger = document.getElementById('burger');
   const mobileMenu = document.getElementById('mobileMenu');
   const mobileLinks = mobileMenu.querySelectorAll('.mobile-menu__link');
+  const mobileClose = document.getElementById('mobileMenuClose');
+
+  function closeMobileMenu() {
+    burger.classList.remove('active');
+    mobileMenu.classList.remove('active');
+    document.body.style.overflow = '';
+  }
 
   burger.addEventListener('click', () => {
     burger.classList.toggle('active');
@@ -23,12 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
   });
 
+  if (mobileClose) {
+    mobileClose.addEventListener('click', closeMobileMenu);
+  }
+
   mobileLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      burger.classList.remove('active');
-      mobileMenu.classList.remove('active');
-      document.body.style.overflow = '';
-    });
+    link.addEventListener('click', closeMobileMenu);
   });
 
   /* ---------- Smooth scroll for anchor links ---------- */

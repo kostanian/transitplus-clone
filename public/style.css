@@ -1405,7 +1405,7 @@ ul, ol {
 }
 
 /* ========== RESPONSIVE ========== */
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   .header__nav {
     display: none;
   }
@@ -1413,6 +1413,9 @@ ul, ol {
   .header__burger {
     display: flex;
   }
+}
+
+@media (max-width: 1024px) {
 
   .about__grid {
     grid-template-columns: 1fr;
