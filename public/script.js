@@ -132,13 +132,15 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ========== ABOUT SECTION ========== */
   reveal('.about__text > *', { y: 40 }, '.about', 0.15);
 
-  gsap.fromTo('.about__image',
-    { opacity: 0, x: 60 },
+  // Animate globe badges
+  gsap.fromTo('.about__globe-badge',
+    { opacity: 0, scale: 0.5 },
     {
-      opacity: 1, x: 0, duration: 1, ease: 'power3.out',
+      opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.7)',
+      stagger: 0.15,
       scrollTrigger: {
-        trigger: '.about',
-        start: 'top 70%',
+        trigger: '.about__visual',
+        start: 'top 80%',
         toggleActions: 'play none none none'
       }
     }

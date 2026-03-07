@@ -1400,10 +1400,12 @@ ul, ol {
     gap: 40px;
   }
 
-  .about__image {
-    max-height: 300px;
-    aspect-ratio: 16/9;
-    order: -1;
+  .about__visual {
+    display: none;
+  }
+
+  .hero__infinity {
+    height: 200px;
   }
 
   .services__grid {
