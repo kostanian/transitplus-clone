@@ -1,24 +1,596 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GlobalTrans — Международная логистика и доставка грузов</title>
-    <meta name="description" content="Надёжная доставка грузов из Азии и стран ЮВА. Авиа, авто, Ж/Д и морская доставка от 100 кг." />
-    <meta name="author" content="GlobalTrans" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChinaPartner — Бизнес-услуги в Китае</title>
+  <meta name="description" content="Комплексное сопровождение бизнеса в Китае: логистика, склад, выкуп товаров, поиск поставщиков, инспекция, регистрация торговой марки, переводы." />
 
-    <meta property="og:title" content="GlobalTrans — Международная логистика" />
-    <meta property="og:description" content="Надёжная доставка грузов из Азии и стран ЮВА" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+  <meta property="og:title" content="ChinaPartner — Ваш партнёр в Китае" />
+  <meta property="og:description" content="Логистика, склад, выкуп, поиск поставщиков и полное сопровождение бизнеса в Китае" />
+  <meta property="og:type" content="website" />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@Lovable" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-  </head>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="#" class="header__logo">
+        <span class="header__logo-icon">华</span>
+        <div class="header__logo-text">
+          <span class="header__logo-name">CHINAPARTNER</span>
+          <span class="header__logo-sub">бизнес-услуги в Китае</span>
+        </div>
+      </a>
+      <nav class="header__nav" id="mainNav">
+        <a href="#about" class="header__link">О компании</a>
+        <a href="#services" class="header__link">Услуги</a>
+        <a href="#advantages" class="header__link">Преимущества</a>
+        <a href="#process" class="header__link">Как работаем</a>
+        <a href="#geography" class="header__link">География</a>
+        <a href="#cases" class="header__link">Кейсы</a>
+        <a href="#contacts" class="header__link">Контакты</a>
+      </nav>
+      <div class="header__right">
+        <a href="#contacts" class="header__cta">Оставить заявку</a>
+        <button class="header__burger" id="burger" aria-label="Меню">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#about" class="mobile-menu__link">О компании</a>
+      <a href="#services" class="mobile-menu__link">Услуги</a>
+      <a href="#advantages" class="mobile-menu__link">Преимущества</a>
+      <a href="#process" class="mobile-menu__link">Как работаем</a>
+      <a href="#geography" class="mobile-menu__link">География</a>
+      <a href="#cases" class="mobile-menu__link">Кейсы</a>
+      <a href="#contacts" class="mobile-menu__link">Контакты</a>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="hero">
+    <div class="hero__bg">
+      <img src="/images/hero-bg.jpg" alt="Порт Шанхая" class="hero__bg-img" />
+      <div class="hero__overlay"></div>
+    </div>
+    <div class="hero__content">
+      <p class="hero__label">Комплексные бизнес-услуги в Китае</p>
+      <h1 class="hero__title">
+        Ваш надёжный<br/>партнёр на<br/>китайском рынке
+      </h1>
+      <p class="hero__subtitle">
+        Логистика, склад, выкуп товаров, поиск поставщиков, инспекция качества, финансовое сопровождение и&nbsp;защита бренда — всё в одних руках.
+      </p>
+      <div class="hero__actions">
+        <a href="#contacts" class="btn btn--primary">Оставить заявку</a>
+        <a href="#about" class="btn btn--outline">Получить консультацию</a>
+      </div>
+    </div>
+    <div class="hero__scroll-indicator">
+      <span>Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT ========== -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about__grid">
+        <div class="about__text">
+          <p class="section-label">О компании</p>
+          <h2 class="section-title">Мы помогаем бизнесу <span class="text-accent">эффективно работать</span> с&nbsp;Китаем</h2>
+          <p class="about__desc">
+            ChinaPartner — это команда специалистов, которая сопровождает ваш бизнес на каждом этапе работы с Китаем. Мы знаем местный рынок изнутри: от особенностей переговоров с поставщиками до нюансов таможенного оформления.
+          </p>
+          <p class="about__desc">
+            Наши офисы и склады расположены в ключевых торговых и логистических хабах Китая. Это позволяет нам оперативно решать задачи любой сложности — от выкупа партии товара до организации мультимодальной доставки.
+          </p>
+          <div class="about__stats">
+            <div class="about__stat">
+              <span class="about__stat-num">8+</span>
+              <span class="about__stat-label">лет на рынке</span>
+            </div>
+            <div class="about__stat">
+              <span class="about__stat-num">1500+</span>
+              <span class="about__stat-label">выполненных заказов</span>
+            </div>
+            <div class="about__stat">
+              <span class="about__stat-num">12</span>
+              <span class="about__stat-label">городов присутствия</span>
+            </div>
+          </div>
+        </div>
+        <div class="about__image">
+          <img src="/images/about-bg.jpg" alt="Складской комплекс ChinaPartner" />
+          <div class="about__image-accent"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SERVICES ========== -->
+  <section class="services" id="services">
+    <div class="container">
+      <p class="section-label">Направления услуг</p>
+      <h2 class="section-title">Полный спектр услуг для работы <span class="text-accent">с Китаем</span></h2>
+
+      <div class="services__grid">
+
+        <!-- Логистика -->
+        <div class="service-card" data-service="logistics">
+          <div class="service-card__icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 16V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10l2-1 2 1 2-1 2 1 2-1"/><path d="M3 16h10v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2z"/><path d="M13 8h3l4 4v4h-2"/><circle cx="18" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+          </div>
+          <h3 class="service-card__title">Логистика</h3>
+          <ul class="service-card__list">
+            <li>Авиадоставка из Китая в Россию и&nbsp;Казахстан</li>
+            <li>Железнодорожная доставка</li>
+            <li>Морская доставка</li>
+            <li>Локальная доставка по Китаю</li>
+          </ul>
+          <div class="service-card__accent"></div>
+        </div>
+
+        <!-- Складские услуги -->
+        <div class="service-card" data-service="warehouse">
+          <div class="service-card__icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21V8l9-4 9 4v13"/><path d="M9 21V12h6v9"/><path d="M3 21h18"/></svg>
+          </div>
+          <h3 class="service-card__title">Складские услуги</h3>
+          <ul class="service-card__list">
+            <li>Приём и обработка грузов</li>
+            <li>Упаковка и маркировка</li>
+            <li>Погрузочно-разгрузочные работы</li>
+            <li>Временное хранение</li>
+            <li>Подготовка для маркетплейсов: Amazon, WB, Ozon</li>
+          </ul>
+          <div class="service-card__accent"></div>
+        </div>
+
+        <!-- Финансовое сопровождение -->
+        <div class="service-card" data-service="finance">
+          <div class="service-card__icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <h3 class="service-card__title">Финансовое сопровождение</h3>
+          <ul class="service-card__list">
+            <li>Перевод денег в Китай</li>
+            <li>Оплата поставщикам за товар</li>
+            <li>Выкуп товаров с 1688, Taobao и других площадок</li>
+          </ul>
+          <div class="service-card__accent"></div>
+        </div>
+
+        <!-- Поиск поставщиков -->
+        <div class="service-card" data-service="sourcing">
+          <div class="service-card__icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
+          </div>
+          <h3 class="service-card__title">Поиск поставщиков и&nbsp;инспекция</h3>
+          <ul class="service-card__list">
+            <li>Поиск поставщиков по всему Китаю</li>
+            <li>Проверка контрагентов</li>
+            <li>Инспекция товара</li>
+            <li>Контроль качества</li>
+          </ul>
+          <div class="service-card__accent"></div>
+        </div>
+
+        <!-- Торговая марка -->
+        <div class="service-card" data-service="trademark">
+          <div class="service-card__icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <h3 class="service-card__title">Регистрация торговой&nbsp;марки</h3>
+          <ul class="service-card__list">
+            <li>Сопровождение регистрации в Китае</li>
+            <li>Защита бренда на китайском рынке</li>
+          </ul>
+          <div class="service-card__accent"></div>
+        </div>
+
+        <!-- Переводчик -->
+        <div class="service-card" data-service="translation">
+          <div class="service-card__icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
+          </div>
+          <h3 class="service-card__title">Услуги переводчика</h3>
+          <ul class="service-card__list">
+            <li>Письменный перевод</li>
+            <li>Устный перевод</li>
+            <li>Сопровождение переводчика в Китае</li>
+          </ul>
+          <div class="service-card__accent"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ADVANTAGES ========== -->
+  <section class="advantages" id="advantages">
+    <div class="container">
+      <p class="section-label">Преимущества</p>
+      <h2 class="section-title">Почему компании выбирают <span class="text-accent">ChinaPartner</span></h2>
+
+      <div class="advantages__grid">
+        <div class="advantage-item">
+          <div class="advantage-item__number">01</div>
+          <h3 class="advantage-item__title">Присутствие по всему Китаю</h3>
+          <p class="advantage-item__text">Собственные представители и склады в ключевых торговых хабах — Гуанчжоу, Иу, Шэньчжэнь, Шанхай и другие города.</p>
+        </div>
+        <div class="advantage-item">
+          <div class="advantage-item__number">02</div>
+          <h3 class="advantage-item__title">Комплексный подход</h3>
+          <p class="advantage-item__text">Не нужно искать отдельного логиста, инспектора, переводчика и агента. Все услуги — в одном месте, с единым контактным лицом.</p>
+        </div>
+        <div class="advantage-item">
+          <div class="advantage-item__number">03</div>
+          <h3 class="advantage-item__title">Прозрачность на каждом этапе</h3>
+          <p class="advantage-item__text">Вы видите, что происходит с вашим грузом, заказом и оплатой. Отчёты, фото, трекинг — без сюрпризов.</p>
+        </div>
+        <div class="advantage-item">
+          <div class="advantage-item__number">04</div>
+          <h3 class="advantage-item__title">Контроль качества</h3>
+          <p class="advantage-item__text">Инспектируем товар до отправки: проверяем комплектность, внешний вид, упаковку и соответствие спецификации.</p>
+        </div>
+        <div class="advantage-item">
+          <div class="advantage-item__number">05</div>
+          <h3 class="advantage-item__title">Финансовая безопасность</h3>
+          <p class="advantage-item__text">Безопасные схемы оплаты поставщикам, проверенные финансовые каналы, документальное подтверждение каждой транзакции.</p>
+        </div>
+        <div class="advantage-item">
+          <div class="advantage-item__number">06</div>
+          <h3 class="advantage-item__title">Языковая и деловая поддержка</h3>
+          <p class="advantage-item__text">Профессиональные переводчики, знание деловой культуры Китая и сопровождение переговоров на месте.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROCESS ========== -->
+  <section class="process" id="process">
+    <div class="container">
+      <p class="section-label">Как проходит работа</p>
+      <h2 class="section-title">От заявки до <span class="text-accent">результата</span></h2>
+
+      <div class="process__timeline">
+        <div class="process__line"></div>
+        <div class="process__line-fill" id="processLineFill"></div>
+
+        <div class="process__step" data-step="1">
+          <div class="process__step-dot"></div>
+          <div class="process__step-content">
+            <span class="process__step-num">01</span>
+            <h3 class="process__step-title">Заявка</h3>
+            <p class="process__step-text">Вы оставляете заявку на сайте или связываетесь с нами через мессенджер. Описываете задачу — мы слушаем.</p>
+          </div>
+        </div>
+
+        <div class="process__step" data-step="2">
+          <div class="process__step-dot"></div>
+          <div class="process__step-content">
+            <span class="process__step-num">02</span>
+            <h3 class="process__step-title">Уточнение задачи</h3>
+            <p class="process__step-text">Разбираемся в деталях: что нужно, в какие сроки, какие особенности. Задаём правильные вопросы.</p>
+          </div>
+        </div>
+
+        <div class="process__step" data-step="3">
+          <div class="process__step-dot"></div>
+          <div class="process__step-content">
+            <span class="process__step-num">03</span>
+            <h3 class="process__step-title">Подбор решения</h3>
+            <p class="process__step-text">Предлагаем оптимальный вариант: маршрут, поставщиков, схему оплаты — с учётом бюджета и сроков.</p>
+          </div>
+        </div>
+
+        <div class="process__step" data-step="4">
+          <div class="process__step-dot"></div>
+          <div class="process__step-content">
+            <span class="process__step-num">04</span>
+            <h3 class="process__step-title">Организация</h3>
+            <p class="process__step-text">Запускаем процесс: закупка, инспекция, упаковка, отправка — каждый этап под контролем.</p>
+          </div>
+        </div>
+
+        <div class="process__step" data-step="5">
+          <div class="process__step-dot"></div>
+          <div class="process__step-content">
+            <span class="process__step-num">05</span>
+            <h3 class="process__step-title">Контроль</h3>
+            <p class="process__step-text">Отслеживаем исполнение, отправляем отчёты и фото. Вы в курсе каждого шага.</p>
+          </div>
+        </div>
+
+        <div class="process__step" data-step="6">
+          <div class="process__step-dot"></div>
+          <div class="process__step-content">
+            <span class="process__step-num">06</span>
+            <h3 class="process__step-title">Результат</h3>
+            <p class="process__step-text">Груз доставлен, задача выполнена. Остаёмся на связи для следующих задач и долгосрочного сотрудничества.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== GEOGRAPHY ========== -->
+  <section class="geography" id="geography">
+    <div class="geography__bg">
+      <img src="/images/map-bg.jpg" alt="Карта маршрутов" class="geography__bg-img" />
+      <div class="geography__overlay"></div>
+    </div>
+    <div class="container geography__content">
+      <p class="section-label section-label--light">География</p>
+      <h2 class="section-title section-title--light">Работаем по всему <span class="text-accent">Китаю</span></h2>
+      <p class="geography__desc">Доставка в Россию и Казахстан авиа, ж/д и морским транспортом. Собственные склады и представители в ключевых городах Китая.</p>
+
+      <div class="geography__cities">
+        <div class="geography__city">
+          <span class="geography__city-dot"></span>
+          <span>Гуанчжоу</span>
+        </div>
+        <div class="geography__city">
+          <span class="geography__city-dot"></span>
+          <span>Шэньчжэнь</span>
+        </div>
+        <div class="geography__city">
+          <span class="geography__city-dot"></span>
+          <span>Иу</span>
+        </div>
+        <div class="geography__city">
+          <span class="geography__city-dot"></span>
+          <span>Шанхай</span>
+        </div>
+        <div class="geography__city">
+          <span class="geography__city-dot"></span>
+          <span>Пекин</span>
+        </div>
+        <div class="geography__city">
+          <span class="geography__city-dot"></span>
+          <span>Нинбо</span>
+        </div>
+        <div class="geography__city">
+          <span class="geography__city-dot"></span>
+          <span>Циндао</span>
+        </div>
+        <div class="geography__city">
+          <span class="geography__city-dot"></span>
+          <span>Ханчжоу</span>
+        </div>
+      </div>
+
+      <div class="geography__routes">
+        <div class="geography__route">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.4-.1.9.3 1.1l5.5 3.6-3 3-1.9-.5c-.3-.1-.7 0-.9.2l-.2.3c-.2.3-.1.7.1.9l3.3 2.5L9 21.3c.3.2.6.3.9.1l.3-.2c.2-.2.3-.6.2-.9l-.5-1.9 3-3 3.6 5.5c.2.4.7.5 1.1.3l.5-.3c.4-.2.6-.6.5-1.1z"/></svg>
+          <div>
+            <strong>Авиадоставка</strong>
+            <span>3–7 дней</span>
+          </div>
+        </div>
+        <div class="geography__route">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg>
+          <div>
+            <strong>Ж/Д доставка</strong>
+            <span>14–20 дней</span>
+          </div>
+        </div>
+        <div class="geography__route">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 20a6 6 0 0 1 6-6h8a6 6 0 0 1 6 6"/><path d="M2 20c2-2 4-3 6-3s4 1 6 3c2-2 4-3 6-3s4 1 6 3"/><path d="M12 4v8"/><path d="M8 8l4-4 4 4"/></svg>
+          <div>
+            <strong>Морская доставка</strong>
+            <span>25–40 дней</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CASES ========== -->
+  <section class="cases" id="cases">
+    <div class="container">
+      <p class="section-label">Типовые задачи</p>
+      <h2 class="section-title">Задачи, с которыми к нам <span class="text-accent">обращаются</span></h2>
+
+      <div class="cases__grid">
+        <div class="case-card">
+          <div class="case-card__num">01</div>
+          <h3 class="case-card__title">Выкуп товара с 1688 и&nbsp;доставка</h3>
+          <p class="case-card__text">Клиент выбирает товар на 1688 или Taobao — мы выкупаем, проверяем, упаковываем и доставляем в&nbsp;Россию или Казахстан выбранным способом.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card__num">02</div>
+          <h3 class="case-card__title">Поиск поставщика и инспекция&nbsp;партии</h3>
+          <p class="case-card__text">Находим производителей под задачу клиента, проверяем надёжность, запрашиваем образцы, проводим инспекцию готовой партии перед&nbsp;отгрузкой.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card__num">03</div>
+          <h3 class="case-card__title">Мультимодальная логистика</h3>
+          <p class="case-card__text">Комбинируем авиа, ж/д и морскую доставку для оптимального баланса стоимости и сроков. Организуем перегрузку и&nbsp;таможенное оформление.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card__num">04</div>
+          <h3 class="case-card__title">Сопровождение переговоров</h3>
+          <p class="case-card__text">Предоставляем переводчика, помогаем с деловым протоколом, участвуем в переговорах с китайскими партнёрами — онлайн или на&nbsp;месте.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card__num">05</div>
+          <h3 class="case-card__title">Регистрация торговой марки</h3>
+          <p class="case-card__text">Сопровождаем полный цикл регистрации бренда в Китае — от подачи заявки до получения свидетельства. Защищаем ваш бренд на&nbsp;китайском рынке.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card__num">06</div>
+          <h3 class="case-card__title">Подготовка для маркетплейсов</h3>
+          <p class="case-card__text">Принимаем товар на склад в Китае, маркируем, упаковываем по требованиям Amazon, Wildberries, Ozon и отправляем на склад маркетплейса.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA ========== -->
+  <section class="cta-section" id="cta">
+    <div class="container">
+      <div class="cta-block">
+        <div class="cta-block__content">
+          <h2 class="cta-block__title">Готовы обсудить <span class="text-accent">вашу задачу?</span></h2>
+          <p class="cta-block__text">Расскажите, что вам нужно — мы предложим решение. Консультация бесплатна и ни к чему не обязывает.</p>
+          <div class="cta-block__actions">
+            <a href="#contacts" class="btn btn--primary btn--lg">Оставить заявку</a>
+            <a href="https://wa.me/" class="btn btn--outline btn--lg" target="_blank" rel="noopener">Написать в WhatsApp</a>
+          </div>
+        </div>
+        <div class="cta-block__decoration">
+          <div class="cta-block__circle cta-block__circle--1"></div>
+          <div class="cta-block__circle cta-block__circle--2"></div>
+          <span class="cta-block__char">华</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACTS ========== -->
+  <section class="contacts" id="contacts">
+    <div class="container">
+      <div class="contacts__grid">
+        <div class="contacts__info">
+          <p class="section-label">Контакты</p>
+          <h2 class="section-title">Свяжитесь <span class="text-accent">с нами</span></h2>
+          <p class="contacts__desc">Оставьте заявку — мы свяжемся с вами в течение рабочего дня. Или напишите напрямую в мессенджер.</p>
+
+          <div class="contacts__channels">
+            <div class="contacts__channel">
+              <div class="contacts__channel-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div>
+                <strong>Телефон</strong>
+                <span>+7 (XXX) XXX-XX-XX</span>
+              </div>
+            </div>
+            <div class="contacts__channel">
+              <div class="contacts__channel-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div>
+                <strong>Email</strong>
+                <span>info@chinapartner.com</span>
+              </div>
+            </div>
+            <div class="contacts__channel">
+              <div class="contacts__channel-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              </div>
+              <div>
+                <strong>WhatsApp</strong>
+                <span>+7 (XXX) XXX-XX-XX</span>
+              </div>
+            </div>
+            <div class="contacts__channel">
+              <div class="contacts__channel-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-8.609 3.33c-2.068.8-4.133 1.598-5.724 2.21a405.15 405.15 0 0 1-2.849 1.09c-.42.147-.99.332-1.473.901-.728.855-.749 2.042-.282 2.906.331.612.768.882 1.07 1.027.282.136.52.209.746.278l3.071.853c.168.548.464 1.51.652 2.14.09.302.206.66.405.997.1.168.226.339.39.494.077.074.167.148.273.216a1.4 1.4 0 0 0 .247.103l-.006.014.013-.006a2.077 2.077 0 0 0 .584.083c.553 0 .965-.282 1.175-.46l2.06-1.753 2.546 1.955c.07.055.345.28.728.432.192.076.4.123.602.146.203.024.394.02.571-.01a2.065 2.065 0 0 0 1.252-.793c.272-.373.378-.778.44-1.078.062-.303.094-.584.119-.822.05-.476.085-.977.117-1.47.066-.999.127-1.99.2-2.984.148-1.997.324-4.002.474-5.53.075-.766.143-1.424.194-1.907a9.96 9.96 0 0 0 .065-.762c.005-.086.01-.222-.011-.386a2.14 2.14 0 0 0-.528-1.203 2.233 2.233 0 0 0-1.714-.722z"/></svg>
+              </div>
+              <div>
+                <strong>Telegram</strong>
+                <span>@chinapartner</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form class="contacts__form" id="contactForm">
+          <div class="form-group">
+            <label for="name">Имя</label>
+            <input type="text" id="name" name="name" placeholder="Как к вам обращаться?" required />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Телефон / мессенджер</label>
+              <input type="text" id="phone" name="phone" placeholder="+7 ..." required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="email@example.com" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="service">Тип услуги</label>
+            <select id="service" name="service">
+              <option value="">Выберите услугу</option>
+              <option>Логистика</option>
+              <option>Складские услуги</option>
+              <option>Финансовое сопровождение</option>
+              <option>Поиск поставщиков</option>
+              <option>Инспекция товара</option>
+              <option>Регистрация торговой марки</option>
+              <option>Услуги переводчика</option>
+              <option>Другое</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Комментарий</label>
+            <textarea id="message" name="message" rows="4" placeholder="Опишите вашу задачу..."></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full">Отправить заявку</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <div class="footer__logo">
+            <span class="footer__logo-icon">华</span>
+            <div>
+              <span class="footer__logo-name">CHINAPARTNER</span>
+              <span class="footer__logo-sub">бизнес-услуги в Китае</span>
+            </div>
+          </div>
+          <p class="footer__about">Комплексное сопровождение бизнеса в Китае: от поиска поставщика до доставки груза.</p>
+        </div>
+        <div class="footer__links">
+          <h4>Услуги</h4>
+          <a href="#services">Логистика</a>
+          <a href="#services">Складские услуги</a>
+          <a href="#services">Финансовое сопровождение</a>
+          <a href="#services">Поиск поставщиков</a>
+          <a href="#services">Торговая марка</a>
+          <a href="#services">Переводчик</a>
+        </div>
+        <div class="footer__links">
+          <h4>Компания</h4>
+          <a href="#about">О компании</a>
+          <a href="#advantages">Преимущества</a>
+          <a href="#process">Как работаем</a>
+          <a href="#geography">География</a>
+          <a href="#cases">Кейсы</a>
+          <a href="#contacts">Контакты</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2026 ChinaPartner. Все права защищены.</p>
+        <p>Политика конфиденциальности</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/script.js"></script>
+</body>
 </html>
