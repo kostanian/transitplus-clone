@@ -385,23 +385,23 @@
   <section class="geography" id="geography">
     <div class="geography__map-bg"></div>
 
-    <!-- City dots overlay -->
-    <div class="geography__cities-overlay">
-      <div class="city-dot" style="top: 22%; left: 67%;" data-city="Пекин"></div>
-      <div class="city-dot" style="top: 25%; left: 69%;" data-city="Тяньцзинь"></div>
-      <div class="city-dot" style="top: 44%; left: 73%;" data-city="Шанхай"></div>
-      <div class="city-dot" style="top: 35%; left: 58%;" data-city="Сиань"></div>
-      <div class="city-dot" style="top: 47%; left: 71%;" data-city="Ханчжоу"></div>
-      <div class="city-dot" style="top: 56%; left: 70%;" data-city="Фучжоу"></div>
-      <div class="city-dot" style="top: 65%; left: 62%;" data-city="Гуанчжоу"></div>
-      <div class="city-dot" style="top: 68%; left: 63%;" data-city="Шэньчжэнь"></div>
-      <div class="city-dot" style="top: 45%; left: 64%;" data-city="Ухань"></div>
-      <div class="city-dot" style="top: 50%; left: 55%;" data-city="Чунцин"></div>
-      <div class="city-dot" style="top: 47%; left: 51%;" data-city="Чэнду"></div>
-      <div class="city-dot" style="top: 30%; left: 70%;" data-city="Циндао"></div>
-      <div class="city-dot" style="top: 17%; left: 60%;" data-city="Хух-Хото"></div>
-      <div class="city-dot" style="top: 32%; left: 50%;" data-city="Ланьчжоу"></div>
-      <div class="city-dot" style="top: 76%; left: 58%;" data-city="Хайкоу"></div>
+    <!-- City dots — JS positions them relative to actual map image bounds -->
+    <div class="geography__cities-overlay" id="citiesOverlay">
+      <div class="city-dot" data-city="Пекин" data-lat="39.9" data-lng="116.4"></div>
+      <div class="city-dot" data-city="Тяньцзинь" data-lat="39.1" data-lng="117.2"></div>
+      <div class="city-dot" data-city="Шанхай" data-lat="31.2" data-lng="121.5"></div>
+      <div class="city-dot" data-city="Сиань" data-lat="34.3" data-lng="108.9"></div>
+      <div class="city-dot" data-city="Ханчжоу" data-lat="30.3" data-lng="120.2"></div>
+      <div class="city-dot" data-city="Фучжоу" data-lat="26.1" data-lng="119.3"></div>
+      <div class="city-dot" data-city="Гуанчжоу" data-lat="23.1" data-lng="113.3"></div>
+      <div class="city-dot" data-city="Шэньчжэнь" data-lat="22.5" data-lng="114.1"></div>
+      <div class="city-dot" data-city="Ухань" data-lat="30.6" data-lng="114.3"></div>
+      <div class="city-dot" data-city="Чунцин" data-lat="29.6" data-lng="106.5"></div>
+      <div class="city-dot" data-city="Чэнду" data-lat="30.6" data-lng="104.1"></div>
+      <div class="city-dot" data-city="Циндао" data-lat="36.1" data-lng="120.4"></div>
+      <div class="city-dot" data-city="Хух-Хото" data-lat="40.8" data-lng="111.7"></div>
+      <div class="city-dot" data-city="Ланьчжоу" data-lat="36.1" data-lng="103.8"></div>
+      <div class="city-dot" data-city="Хайкоу" data-lat="20.0" data-lng="110.3"></div>
     </div>
 
     <div class="container geography__content">

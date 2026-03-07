@@ -462,8 +462,89 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ========== CITY DOTS POSITIONING ========== */
+  // The map image (map-bg.jpg) shows China roughly within these geographic bounds:
+  // The image itself is 1920x1080. China's outline within the image occupies approximately:
+  // - Image-relative bounds: left ~12%, right ~82%, top ~5%, bottom ~95%
+  // Geographic bounds of visible China on the map:
+  const MAP_BOUNDS = {
+    latTop: 53.5,     // northernmost latitude
+    latBottom: 18.0,   // southernmost latitude  
+    lngLeft: 73.5,     // westernmost longitude
+    lngRight: 135.0    // easternmost longitude
+  };
+
+  // Where the China map sits within the background image (as fractions of image)
+  const IMG_CHINA = {
+    left: 0.12,
+    right: 0.82,
+    top: 0.05,
+    bottom: 0.95
+  };
+
+  function positionCityDots() {
+    const overlay = document.getElementById('citiesOverlay');
+    if (!overlay) return;
+
+    const section = document.querySelector('.geography');
+    const sectionRect = section.getBoundingClientRect();
+    const overlayRect = overlay.getBoundingClientRect();
+
+    // Calculate where the bg image actually renders (contain mode, centered)
+    const bgEl = document.querySelector('.geography__map-bg');
+    const bgRect = bgEl.getBoundingClientRect();
+    const containerW = bgRect.width;
+    const containerH = bgRect.height;
+    const imgRatio = 1920 / 1080;
+    const containerRatio = containerW / containerH;
+
+    let imgW, imgH, imgOffX, imgOffY;
+    if (containerRatio > imgRatio) {
+      // Container wider than image — image fits by height
+      imgH = containerH;
+      imgW = containerH * imgRatio;
+      imgOffX = (containerW - imgW) / 2;
+      imgOffY = 0;
+    } else {
+      // Container taller than image — image fits by width
+      imgW = containerW;
+      imgH = containerW / imgRatio;
+      imgOffX = 0;
+      imgOffY = (containerH - imgH) / 2;
+    }
+
+    const dots = overlay.querySelectorAll('.city-dot');
+    dots.forEach(dot => {
+      const lat = parseFloat(dot.dataset.lat);
+      const lng = parseFloat(dot.dataset.lng);
+
+      // Convert lat/lng to fraction within map bounds
+      const fracX = (lng - MAP_BOUNDS.lngLeft) / (MAP_BOUNDS.lngRight - MAP_BOUNDS.lngLeft);
+      const fracY = (MAP_BOUNDS.latTop - lat) / (MAP_BOUNDS.latTop - MAP_BOUNDS.latBottom);
+
+      // Convert to position within the image's China area
+      const imgFracX = IMG_CHINA.left + fracX * (IMG_CHINA.right - IMG_CHINA.left);
+      const imgFracY = IMG_CHINA.top + fracY * (IMG_CHINA.bottom - IMG_CHINA.top);
+
+      // Convert to pixel position within overlay
+      const pixelX = imgOffX + imgFracX * imgW;
+      const pixelY = imgOffY + imgFracY * imgH;
+
+      // Convert to percentage of overlay
+      const pctLeft = (pixelX / containerW) * 100;
+      const pctTop = (pixelY / containerH) * 100;
+
+      dot.style.left = pctLeft + '%';
+      dot.style.top = pctTop + '%';
+    });
+  }
+
+  positionCityDots();
+  window.addEventListener('resize', positionCityDots);
+
   /* ========== REFRESH ON LOAD ========== */
   window.addEventListener('load', () => {
     ScrollTrigger.refresh();
+    positionCityDots();
   });
 });
