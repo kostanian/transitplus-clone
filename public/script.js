@@ -82,9 +82,12 @@ document.addEventListener('DOMContentLoaded', () => {
     .fromTo('.hero__subtitle',
       { opacity: 0, y: 30 },
       { opacity: 1, y: 0, duration: 0.8 }, '-=0.6')
+    .fromTo('.hero__routes',
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.7 }, '-=0.4')
     .fromTo('.hero__actions',
       { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.7 }, '-=0.4');
+      { opacity: 1, y: 0, duration: 0.7 }, '-=0.3');
 
   // Hero parallax on scroll
   gsap.to('.hero__bg-img', {
