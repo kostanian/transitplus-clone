@@ -748,7 +748,7 @@ ul, ol {
 }
 
 .process__step-content {
-  opacity: 0.4;
+  opacity: 1;
   transition: opacity 0.4s;
 }
 
