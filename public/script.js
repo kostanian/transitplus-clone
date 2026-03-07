@@ -130,8 +130,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const iconState = Array.from(flowIcons).map((icon, i) => {
       const emoji = allIcons[i % allIcons.length];
       icon.textContent = emoji;
-      return { insideFlag: -1, currentEmoji: emoji };
+      return { insideFlag: -1, currentEmoji: emoji, prevX: null };
     });
+
+    // Icons that should be flipped when moving right (from RU→CN or CN→KZ)
+    const flippableIcons = ['🚛', '🛳️'];
 
     // Track glow state per flag
     const flagGlowCount = [0, 0, 0];
@@ -194,7 +197,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const y = point.y * scaleY;
         icon.style.left = x + 'px';
         icon.style.top = y + 'px';
-        icon.style.transform = 'translate(-50%, -50%)';
+
+        // Flip 🚛 and 🛳️ when moving right (RU→CN or CN→KZ direction)
+        let rotation = '';
+        if (state.prevX !== null && flippableIcons.includes(state.currentEmoji)) {
+          const movingRight = point.x > state.prevX;
+          if (movingRight) {
+            rotation = ' scaleX(-1)';
+          }
+        }
+        state.prevX = point.x;
+        icon.style.transform = 'translate(-50%, -50%)' + rotation;
 
         requestAnimationFrame(step);
       }
