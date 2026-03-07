@@ -101,49 +101,101 @@ document.addEventListener('DOMContentLoaded', () => {
   const flowIcons = document.querySelectorAll('.flow-icon');
 
   if (infinityPath && flowIcons.length) {
-    // Get the SVG path d attribute to use as offset-path
-    const pathD = infinityPath.getAttribute('d');
     const svgEl = infinityPath.closest('svg');
-    const svgRect = svgEl.getBoundingClientRect();
     const containerRect = document.querySelector('.hero__infinity').getBoundingClientRect();
-
-    // Calculate scale factors
     const viewBox = svgEl.viewBox.baseVal;
     const scaleX = containerRect.width / viewBox.width;
     const scaleY = containerRect.height / viewBox.height;
-
-    // Animate each icon using MotionPathPlugin fallback — manually sample path
     const pathLen = infinityPath.getTotalLength();
     const totalIcons = flowIcons.length;
 
+    // Flag centers in SVG coordinates
+    const flagCenters = [
+      { x: 200, y: 150, selector: '.infinity-node--ru .infinity-node__circle' },
+      { x: 500, y: 150, selector: '.infinity-node--cn .infinity-node__circle' },
+      { x: 800, y: 150, selector: '.infinity-node--kz .infinity-node__circle' }
+    ];
+    const flagRadius = 55; // SVG units — hide zone
+
+    // Icon sets: each icon alternates between two emojis when passing through a flag
+    const iconSets = ['📦', '💰', '🚛', '📦', '💰', '🚛'];
+    const altIcons  = ['🏭', '💎', '✈️', '🏭', '💎', '✈️'];
+
+    // Track state per icon
+    const iconState = flowIcons.length ? Array.from(flowIcons).map((_, i) => ({
+      insideFlag: -1, // which flag index (-1 = none)
+      useAlt: false
+    })) : [];
+
+    // Track glow state per flag
+    const flagGlowCount = [0, 0, 0];
+    const flagElements = flagCenters.map(f => document.querySelector(f.selector));
+
     flowIcons.forEach((icon, i) => {
       const startPercent = i / totalIcons;
-      const duration = 8000; // ms per full loop
+      const duration = 8000;
+      icon.textContent = iconSets[i];
 
-      function animateIcon() {
-        const startTime = performance.now() - (startPercent * duration);
+      const startTime = performance.now() - (startPercent * duration);
 
-        function step(now) {
-          const elapsed = (now - startTime) % duration;
-          const progress = elapsed / duration;
-          const point = infinityPath.getPointAtLength(progress * pathLen);
+      function step(now) {
+        const elapsed = (now - startTime) % duration;
+        const progress = elapsed / duration;
+        const point = infinityPath.getPointAtLength(progress * pathLen);
 
-          // Map SVG coords to container coords
-          const x = point.x * scaleX;
-          const y = point.y * scaleY;
-
-          icon.style.left = x + 'px';
-          icon.style.top = y + 'px';
-          icon.style.transform = 'translate(-50%, -50%)';
-          icon.style.opacity = '0.85';
-
-          requestAnimationFrame(step);
+        // Check proximity to each flag
+        let currentFlag = -1;
+        for (let f = 0; f < flagCenters.length; f++) {
+          const dx = point.x - flagCenters[f].x;
+          const dy = point.y - flagCenters[f].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < flagRadius) {
+            currentFlag = f;
+            break;
+          }
         }
+
+        const state = iconState[i];
+
+        if (currentFlag >= 0 && state.insideFlag !== currentFlag) {
+          // Entered a new flag zone
+          state.insideFlag = currentFlag;
+          flagGlowCount[currentFlag]++;
+          if (flagElements[currentFlag]) {
+            flagElements[currentFlag].classList.add('glow');
+          }
+        } else if (currentFlag < 0 && state.insideFlag >= 0) {
+          // Exited a flag zone — swap icon
+          const prevFlag = state.insideFlag;
+          flagGlowCount[prevFlag]--;
+          if (flagGlowCount[prevFlag] <= 0) {
+            flagGlowCount[prevFlag] = 0;
+            if (flagElements[prevFlag]) {
+              flagElements[prevFlag].classList.remove('glow');
+            }
+          }
+          state.insideFlag = -1;
+          state.useAlt = !state.useAlt;
+          icon.textContent = state.useAlt ? altIcons[i] : iconSets[i];
+        }
+
+        // Hide icon inside flag zones
+        if (currentFlag >= 0) {
+          icon.style.opacity = '0';
+        } else {
+          icon.style.opacity = '0.85';
+        }
+
+        const x = point.x * scaleX;
+        const y = point.y * scaleY;
+        icon.style.left = x + 'px';
+        icon.style.top = y + 'px';
+        icon.style.transform = 'translate(-50%, -50%)';
 
         requestAnimationFrame(step);
       }
 
-      animateIcon();
+      requestAnimationFrame(step);
     });
   }
 

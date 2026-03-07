@@ -87,14 +87,21 @@
               <stop offset="70%" stop-color="#c9a84c" stop-opacity="1"/>
               <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
             </linearGradient>
+            <!-- Mask to hide path segments inside flag circles -->
+            <mask id="flagMask">
+              <rect width="1000" height="300" fill="white"/>
+              <circle cx="200" cy="150" r="55" fill="black"/>
+              <circle cx="500" cy="150" r="60" fill="black"/>
+              <circle cx="800" cy="150" r="55" fill="black"/>
+            </mask>
           </defs>
-          <!-- Infinity: enters flags from top, exits from bottom -->
+          <!-- Infinity path masked by flag circles -->
           <path id="infinityPath" class="infinity-path" 
             d="M500,150 C500,40 200,40 200,150 C200,260 500,260 500,150 C500,40 800,40 800,150 C800,260 500,260 500,150" 
-            fill="none" stroke="rgba(201,168,76,0.12)" stroke-width="1.5"/>
+            fill="none" stroke="rgba(201,168,76,0.12)" stroke-width="1.5" mask="url(#flagMask)"/>
           <path id="infinityGlow" class="infinity-glow" 
             d="M500,150 C500,40 200,40 200,150 C200,260 500,260 500,150 C500,40 800,40 800,150 C800,260 500,260 500,150" 
-            fill="none" stroke="url(#goldGradient)" stroke-width="2.5"/>
+            fill="none" stroke="url(#goldGradient)" stroke-width="2.5" mask="url(#flagMask)"/>
         </svg>
         <!-- Country nodes -->
         <div class="infinity-node infinity-node--ru">
