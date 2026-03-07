@@ -964,6 +964,14 @@ ul, ol {
   z-index: 2;
 }
 
+.geography__content > .section-title {
+  background-color: rgba(128, 128, 128, 0.4);
+  display: inline;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding: 4px 12px;
+}
+
 .geography__desc {
   font-size: 18px;
   line-height: 1.7;
