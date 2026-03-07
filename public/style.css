@@ -431,18 +431,21 @@ ul, ol {
   position: relative;
   width: 100%;
   max-width: 700px;
-  height: 260px;
+  height: 280px;
   margin-bottom: 40px;
   opacity: 0;
 }
 
 .infinity-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
 }
 
 .infinity-path {
-  stroke-dasharray: 4 8;
+  stroke-dasharray: 6 10;
 }
 
 .infinity-glow {
@@ -450,6 +453,7 @@ ul, ol {
   stroke-dashoffset: 0;
 }
 
+/* Nodes sit on top of SVG using same coordinate positions */
 .infinity-node {
   position: absolute;
   display: flex;
@@ -457,44 +461,48 @@ ul, ol {
   align-items: center;
   gap: 6px;
   transform: translate(-50%, -50%);
+  z-index: 2;
 }
 
+/* Russia = left loop center (SVG x=200 of 800 = 25%) */
 .infinity-node--ru {
   left: 25%;
   top: 50%;
 }
 
+/* China = center crossing (SVG x=400 of 800 = 50%) */
 .infinity-node--cn {
   left: 50%;
   top: 50%;
 }
 
+/* Kazakhstan = right loop center (SVG x=600 of 800 = 75%) */
 .infinity-node--kz {
   left: 75%;
   top: 50%;
 }
 
 .infinity-node__circle {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
-  backdrop-filter: blur(8px);
+  font-size: 26px;
+  backdrop-filter: blur(10px);
   transition: all 0.4s;
 }
 
 .infinity-node__circle--main {
-  width: 60px;
-  height: 60px;
-  font-size: 30px;
+  width: 64px;
+  height: 64px;
+  font-size: 32px;
   border-color: var(--color-accent);
-  background: rgba(201, 168, 76, 0.12);
-  box-shadow: 0 0 30px rgba(201, 168, 76, 0.2);
+  background: rgba(201, 168, 76, 0.15);
+  box-shadow: 0 0 40px rgba(201, 168, 76, 0.25), 0 0 80px rgba(201, 168, 76, 0.1);
 }
 
 .infinity-node__label {
@@ -505,12 +513,14 @@ ul, ol {
   color: rgba(255, 255, 255, 0.7);
 }
 
+/* Flow icons follow the SVG infinity path */
 .flow-icon {
   position: absolute;
-  font-size: 18px;
-  opacity: 0;
-  offset-path: path("M400,150 C400,80 300,30 200,30 C100,30 0,80 0,150 C0,220 100,270 200,270 C300,270 400,220 400,150 C400,80 500,30 600,30 C700,30 800,80 800,150 C800,220 700,270 600,270 C500,270 400,220 400,150");
-  will-change: offset-distance;
+  font-size: 20px;
+  z-index: 1;
+  filter: drop-shadow(0 0 6px rgba(201,168,76,0.4));
+  /* offset-path set via JS to use the actual SVG path */
+  will-change: offset-distance, opacity;
 }
 
 .hero__actions {
