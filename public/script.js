@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const flagRadius = 55;
 
     // Pool of all possible icons — each icon picks randomly on exit
-    const allIcons = ['📦', '💰', '🚛', '🏭', '💎', '✈️', '🛳️', '📋', '⚙️', '🔧'];
+    const allIcons = ['📦', '💰', '🚛', '🏭', '🛍️', '✈️', '🛳️', '📋', '⚙️', '🔧'];
 
     function randomIcon(exclude) {
       let pick;
