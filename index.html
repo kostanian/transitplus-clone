@@ -75,12 +75,42 @@
       <p class="hero__subtitle">
         Логистика, склад, выкуп товаров, поиск поставщиков, инспекция качества и&nbsp;финансовое сопровождение — полный цикл от Китая до&nbsp;вашего склада в&nbsp;РФ&nbsp;и&nbsp;РК.
       </p>
-      <div class="hero__routes">
-        <span class="hero__route-tag">🇨🇳 Китай</span>
-        <span class="hero__route-arrow">→</span>
-        <span class="hero__route-tag">🇷🇺 Россия</span>
-        <span class="hero__route-arrow">→</span>
-        <span class="hero__route-tag">🇰🇿 Казахстан</span>
+      <!-- Infinity Loop Animation -->
+      <div class="hero__infinity" id="infinityLoop">
+        <svg class="infinity-svg" viewBox="0 0 800 300" preserveAspectRatio="xMidYMid meet">
+          <!-- Infinity path (figure-8) -->
+          <path id="infinityPath" class="infinity-path" d="M400,150 C400,80 300,30 200,30 C100,30 0,80 0,150 C0,220 100,270 200,270 C300,270 400,220 400,150 C400,80 500,30 600,30 C700,30 800,80 800,150 C800,220 700,270 600,270 C500,270 400,220 400,150" fill="none" stroke="rgba(201,168,76,0.15)" stroke-width="2"/>
+          <!-- Glowing animated stroke -->
+          <path id="infinityGlow" class="infinity-glow" d="M400,150 C400,80 300,30 200,30 C100,30 0,80 0,150 C0,220 100,270 200,270 C300,270 400,220 400,150 C400,80 500,30 600,30 C700,30 800,80 800,150 C800,220 700,270 600,270 C500,270 400,220 400,150" fill="none" stroke="url(#goldGradient)" stroke-width="2"/>
+          <defs>
+            <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#c9a84c" stop-opacity="0"/>
+              <stop offset="40%" stop-color="#c9a84c" stop-opacity="1"/>
+              <stop offset="60%" stop-color="#e8c86a" stop-opacity="1"/>
+              <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <!-- Country nodes -->
+        <div class="infinity-node infinity-node--ru">
+          <div class="infinity-node__circle">🇷🇺</div>
+          <span class="infinity-node__label">Россия</span>
+        </div>
+        <div class="infinity-node infinity-node--cn">
+          <div class="infinity-node__circle infinity-node__circle--main">🇨🇳</div>
+          <span class="infinity-node__label">Китай</span>
+        </div>
+        <div class="infinity-node infinity-node--kz">
+          <div class="infinity-node__circle">🇰🇿</div>
+          <span class="infinity-node__label">Казахстан</span>
+        </div>
+        <!-- Flowing icons -->
+        <div class="flow-icon flow-icon--1">📦</div>
+        <div class="flow-icon flow-icon--2">💰</div>
+        <div class="flow-icon flow-icon--3">🚛</div>
+        <div class="flow-icon flow-icon--4">📦</div>
+        <div class="flow-icon flow-icon--5">💰</div>
+        <div class="flow-icon flow-icon--6">🚛</div>
       </div>
       <div class="hero__actions">
         <a href="#contacts" class="btn btn--primary">Оставить заявку</a>
