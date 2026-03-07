@@ -163,19 +163,32 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ========== ABOUT SECTION ========== */
   reveal('.about__text > *', { y: 40 }, '.about', 0.15);
 
-  // Animate globe badges
-  gsap.fromTo('.about__globe-badge',
-    { opacity: 0, scale: 0.5 },
-    {
-      opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.7)',
-      stagger: 0.15,
-      scrollTrigger: {
-        trigger: '.about__visual',
-        start: 'top 80%',
-        toggleActions: 'play none none none'
+  // Animate about visual image reveal
+  const aboutVisual = document.querySelector('.about__visual');
+  if (aboutVisual) {
+    gsap.fromTo(aboutVisual,
+      { opacity: 0, scale: 0.95 },
+      {
+        opacity: 1, scale: 1, duration: 1, ease: 'power3.out',
+        scrollTrigger: {
+          trigger: aboutVisual,
+          start: 'top 80%',
+          toggleActions: 'play none none none'
+        }
       }
-    }
-  );
+    );
+    gsap.fromTo('.about__visual-tag',
+      { opacity: 0, y: 10 },
+      {
+        opacity: 1, y: 0, duration: 0.5, stagger: 0.1,
+        scrollTrigger: {
+          trigger: aboutVisual,
+          start: 'top 70%',
+          toggleActions: 'play none none none'
+        }
+      }
+    );
+  }
 
   reveal('.about__stat', { y: 30 }, '.about__stats', 0.2);
 
