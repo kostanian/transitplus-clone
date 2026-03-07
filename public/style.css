@@ -314,22 +314,31 @@ ul, ol {
 }
 
 .mobile-menu {
-  display: none;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
   background: var(--color-bg);
-  padding: calc(var(--header-h) + 40px) 24px 40px;
+  padding: calc(var(--header-h) + 40px) 32px 40px;
+  display: flex;
   flex-direction: column;
   gap: 8px;
-  z-index: 999;
+  z-index: 998;
   overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+  transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
 }
 
 .mobile-menu.active {
-  display: flex;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 .mobile-menu__link {
@@ -422,18 +431,21 @@ ul, ol {
   position: relative;
   width: 100%;
   max-width: 700px;
-  height: 260px;
+  height: 280px;
   margin-bottom: 40px;
   opacity: 0;
 }
 
 .infinity-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
 }
 
 .infinity-path {
-  stroke-dasharray: 4 8;
+  stroke-dasharray: 6 10;
 }
 
 .infinity-glow {
@@ -441,6 +453,7 @@ ul, ol {
   stroke-dashoffset: 0;
 }
 
+/* Nodes sit on top of SVG using same coordinate positions */
 .infinity-node {
   position: absolute;
   display: flex;
@@ -448,44 +461,48 @@ ul, ol {
   align-items: center;
   gap: 6px;
   transform: translate(-50%, -50%);
+  z-index: 2;
 }
 
+/* Russia = left loop center (SVG x=200 of 800 = 25%) */
 .infinity-node--ru {
   left: 25%;
   top: 50%;
 }
 
+/* China = center crossing (SVG x=400 of 800 = 50%) */
 .infinity-node--cn {
   left: 50%;
   top: 50%;
 }
 
+/* Kazakhstan = right loop center (SVG x=600 of 800 = 75%) */
 .infinity-node--kz {
   left: 75%;
   top: 50%;
 }
 
 .infinity-node__circle {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
-  backdrop-filter: blur(8px);
+  font-size: 26px;
+  backdrop-filter: blur(10px);
   transition: all 0.4s;
 }
 
 .infinity-node__circle--main {
-  width: 60px;
-  height: 60px;
-  font-size: 30px;
+  width: 64px;
+  height: 64px;
+  font-size: 32px;
   border-color: var(--color-accent);
-  background: rgba(201, 168, 76, 0.12);
-  box-shadow: 0 0 30px rgba(201, 168, 76, 0.2);
+  background: rgba(201, 168, 76, 0.15);
+  box-shadow: 0 0 40px rgba(201, 168, 76, 0.25), 0 0 80px rgba(201, 168, 76, 0.1);
 }
 
 .infinity-node__label {
@@ -496,12 +513,14 @@ ul, ol {
   color: rgba(255, 255, 255, 0.7);
 }
 
+/* Flow icons follow the SVG infinity path */
 .flow-icon {
   position: absolute;
-  font-size: 18px;
-  opacity: 0;
-  offset-path: path("M400,150 C400,80 300,30 200,30 C100,30 0,80 0,150 C0,220 100,270 200,270 C300,270 400,220 400,150 C400,80 500,30 600,30 C700,30 800,80 800,150 C800,220 700,270 600,270 C500,270 400,220 400,150");
-  will-change: offset-distance;
+  font-size: 20px;
+  z-index: 1;
+  filter: drop-shadow(0 0 6px rgba(201,168,76,0.4));
+  /* offset-path set via JS to use the actual SVG path */
+  will-change: offset-distance, opacity;
 }
 
 .hero__actions {
@@ -598,82 +617,58 @@ ul, ol {
   margin-top: 8px;
 }
 
-/* ===== ABOUT VISUAL (animated globe) ===== */
+/* ===== ABOUT VISUAL ===== */
 .about__visual {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.about__globe {
   position: relative;
-  width: 360px;
-  height: 360px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 1;
+  max-height: 480px;
 }
 
-.about__globe-svg {
+.about__visual-img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
 }
 
-.about__orbit--1 { animation: orbitSpin1 20s linear infinite; transform-origin: 200px 200px; }
-.about__orbit--2 { animation: orbitSpin2 25s linear infinite; transform-origin: 200px 200px; }
-.about__orbit--3 { animation: orbitSpin3 30s linear infinite; transform-origin: 200px 200px; }
-
-@keyframes orbitSpin1 { to { transform: rotate(360deg); } }
-@keyframes orbitSpin2 { to { transform: rotate(-360deg); } }
-@keyframes orbitSpin3 { to { transform: rotate(360deg); } }
-
-.about__dot--1 { animation: dotOrbit1 8s ease-in-out infinite; }
-.about__dot--2 { animation: dotOrbit2 10s ease-in-out infinite; }
-.about__dot--3 { animation: dotOrbit3 12s ease-in-out infinite; }
-.about__dot--4 { animation: dotOrbit4 9s ease-in-out infinite; }
-
-@keyframes dotOrbit1 {
-  0%, 100% { cx: 360; cy: 200; opacity: 0.8; }
-  50% { cx: 40; cy: 200; opacity: 0.3; }
-}
-@keyframes dotOrbit2 {
-  0%, 100% { cx: 200; cy: 100; opacity: 0.7; }
-  50% { cx: 200; cy: 300; opacity: 0.2; }
-}
-@keyframes dotOrbit3 {
-  0%, 100% { cx: 100; cy: 260; opacity: 0.8; }
-  50% { cx: 300; cy: 140; opacity: 0.3; }
-}
-@keyframes dotOrbit4 {
-  0%, 100% { cx: 300; cy: 280; opacity: 0.6; }
-  50% { cx: 100; cy: 120; opacity: 0.2; }
+.about__visual:hover .about__visual-img {
+  transform: scale(1.05);
 }
 
-.about__globe-char {
+.about__visual-overlay {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 52px;
-  font-weight: 700;
-  color: var(--color-accent);
-  opacity: 0.25;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(11, 15, 26, 0.1) 0%,
+    rgba(11, 15, 26, 0.6) 100%
+  );
 }
 
-.about__globe-badge {
+.about__visual-badge {
   position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  gap: 12px;
+}
+
+.about__visual-tag {
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--color-accent);
-  background: var(--color-accent-dim);
-  border: 1px solid rgba(201, 168, 76, 0.2);
+  background: rgba(201, 168, 76, 0.15);
+  border: 1px solid rgba(201, 168, 76, 0.25);
   border-radius: 20px;
   padding: 6px 14px;
+  backdrop-filter: blur(12px);
   white-space: nowrap;
 }
-
-.about__globe-badge--1 { top: 10%; right: 0; }
-.about__globe-badge--2 { bottom: 15%; left: -10px; }
-.about__globe-badge--3 { bottom: 5%; right: -5px; }
 
 /* ========== SERVICES ========== */
 .services {

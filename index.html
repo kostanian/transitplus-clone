@@ -78,18 +78,23 @@
       <!-- Infinity Loop Animation -->
       <div class="hero__infinity" id="infinityLoop">
         <svg class="infinity-svg" viewBox="0 0 800 300" preserveAspectRatio="xMidYMid meet">
-          <!-- Infinity path (figure-8) -->
-          <path id="infinityPath" class="infinity-path" d="M400,150 C400,80 300,30 200,30 C100,30 0,80 0,150 C0,220 100,270 200,270 C300,270 400,220 400,150 C400,80 500,30 600,30 C700,30 800,80 800,150 C800,220 700,270 600,270 C500,270 400,220 400,150" fill="none" stroke="rgba(201,168,76,0.15)" stroke-width="2"/>
-          <!-- Glowing animated stroke -->
-          <path id="infinityGlow" class="infinity-glow" d="M400,150 C400,80 300,30 200,30 C100,30 0,80 0,150 C0,220 100,270 200,270 C300,270 400,220 400,150 C400,80 500,30 600,30 C700,30 800,80 800,150 C800,220 700,270 600,270 C500,270 400,220 400,150" fill="none" stroke="url(#goldGradient)" stroke-width="2"/>
           <defs>
             <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stop-color="#c9a84c" stop-opacity="0"/>
-              <stop offset="40%" stop-color="#c9a84c" stop-opacity="1"/>
-              <stop offset="60%" stop-color="#e8c86a" stop-opacity="1"/>
+              <stop offset="30%" stop-color="#c9a84c" stop-opacity="1"/>
+              <stop offset="50%" stop-color="#e8c86a" stop-opacity="1"/>
+              <stop offset="70%" stop-color="#c9a84c" stop-opacity="1"/>
               <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
             </linearGradient>
           </defs>
+          <!-- Infinity path passing through all 3 node centers: Russia(200,150), China(400,150), Kazakhstan(600,150) -->
+          <path id="infinityPath" class="infinity-path" 
+            d="M400,150 C400,60 310,20 200,20 C90,20 0,60 0,150 C0,240 90,280 200,280 C310,280 400,240 400,150 C400,60 490,20 600,20 C710,20 800,60 800,150 C800,240 710,280 600,280 C490,280 400,240 400,150" 
+            fill="none" stroke="rgba(201,168,76,0.12)" stroke-width="1.5"/>
+          <!-- Glowing animated stroke -->
+          <path id="infinityGlow" class="infinity-glow" 
+            d="M400,150 C400,60 310,20 200,20 C90,20 0,60 0,150 C0,240 90,280 200,280 C310,280 400,240 400,150 C400,60 490,20 600,20 C710,20 800,60 800,150 C800,240 710,280 600,280 C490,280 400,240 400,150" 
+            fill="none" stroke="url(#goldGradient)" stroke-width="2.5"/>
         </svg>
         <!-- Country nodes -->
         <div class="infinity-node infinity-node--ru">
@@ -152,36 +157,12 @@
           </div>
         </div>
         <div class="about__visual">
-          <div class="about__globe">
-            <svg viewBox="0 0 400 400" class="about__globe-svg">
-              <!-- Outer ring -->
-              <circle cx="200" cy="200" r="160" fill="none" stroke="rgba(201,168,76,0.1)" stroke-width="1"/>
-              <circle cx="200" cy="200" r="120" fill="none" stroke="rgba(201,168,76,0.08)" stroke-width="1"/>
-              <circle cx="200" cy="200" r="80" fill="none" stroke="rgba(201,168,76,0.06)" stroke-width="1"/>
-              <!-- Orbit ring 1 -->
-              <ellipse cx="200" cy="200" rx="160" ry="60" fill="none" stroke="rgba(201,168,76,0.12)" stroke-width="1" class="about__orbit about__orbit--1"/>
-              <!-- Orbit ring 2 -->
-              <ellipse cx="200" cy="200" rx="140" ry="100" fill="none" stroke="rgba(201,168,76,0.1)" stroke-width="1" transform="rotate(60 200 200)" class="about__orbit about__orbit--2"/>
-              <!-- Orbit ring 3 -->
-              <ellipse cx="200" cy="200" rx="150" ry="80" fill="none" stroke="rgba(201,168,76,0.08)" stroke-width="1" transform="rotate(-30 200 200)" class="about__orbit about__orbit--3"/>
-              <!-- Center glow -->
-              <circle cx="200" cy="200" r="40" fill="url(#aboutCenterGlow)"/>
-              <!-- Orbiting dots -->
-              <circle class="about__dot about__dot--1" cx="360" cy="200" r="6" fill="#c9a84c"/>
-              <circle class="about__dot about__dot--2" cx="200" cy="100" r="4" fill="#e8c86a"/>
-              <circle class="about__dot about__dot--3" cx="100" cy="260" r="5" fill="#c9a84c"/>
-              <circle class="about__dot about__dot--4" cx="300" cy="280" r="3" fill="#e8c86a"/>
-              <defs>
-                <radialGradient id="aboutCenterGlow">
-                  <stop offset="0%" stop-color="rgba(201,168,76,0.2)"/>
-                  <stop offset="100%" stop-color="rgba(201,168,76,0)"/>
-                </radialGradient>
-              </defs>
-            </svg>
-            <span class="about__globe-char">华</span>
-            <div class="about__globe-badge about__globe-badge--1">8+ лет</div>
-            <div class="about__globe-badge about__globe-badge--2">12 городов</div>
-            <div class="about__globe-badge about__globe-badge--3">1500+ заказов</div>
+          <img src="/images/about-logistics.jpg" alt="Логистический хаб в Китае" class="about__visual-img" loading="lazy" />
+          <div class="about__visual-overlay"></div>
+          <div class="about__visual-badge">
+            <span class="about__visual-tag">8+ лет</span>
+            <span class="about__visual-tag">12 городов</span>
+            <span class="about__visual-tag">1500+ заказов</span>
           </div>
         </div>
       </div>

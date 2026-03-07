@@ -89,23 +89,54 @@ document.addEventListener('DOMContentLoaded', () => {
       { opacity: 0, y: 30 },
       { opacity: 1, y: 0, duration: 0.7 }, '-=0.3');
 
-  /* Infinity loop flowing icons animation */
+  /* Infinity loop — animate icons along the SVG path */
+  const infinityPath = document.getElementById('infinityPath');
   const flowIcons = document.querySelectorAll('.flow-icon');
-  if (flowIcons.length) {
+
+  if (infinityPath && flowIcons.length) {
+    // Get the SVG path d attribute to use as offset-path
+    const pathD = infinityPath.getAttribute('d');
+    const svgEl = infinityPath.closest('svg');
+    const svgRect = svgEl.getBoundingClientRect();
+    const containerRect = document.querySelector('.hero__infinity').getBoundingClientRect();
+
+    // Calculate scale factors
+    const viewBox = svgEl.viewBox.baseVal;
+    const scaleX = containerRect.width / viewBox.width;
+    const scaleY = containerRect.height / viewBox.height;
+
+    // Animate each icon using MotionPathPlugin fallback — manually sample path
+    const pathLen = infinityPath.getTotalLength();
+    const totalIcons = flowIcons.length;
+
     flowIcons.forEach((icon, i) => {
-      const duration = 6 + (i % 3);
-      const startOffset = (i / flowIcons.length) * 100;
-      gsap.set(icon, { opacity: 0.7 });
-      gsap.fromTo(icon,
-        { offsetDistance: startOffset + '%' },
-        {
-          offsetDistance: (startOffset + 100) + '%',
-          duration: duration,
-          repeat: -1,
-          ease: 'none',
-          delay: i * 0.5
+      const startPercent = i / totalIcons;
+      const duration = 8000; // ms per full loop
+
+      function animateIcon() {
+        const startTime = performance.now() - (startPercent * duration);
+
+        function step(now) {
+          const elapsed = (now - startTime) % duration;
+          const progress = elapsed / duration;
+          const point = infinityPath.getPointAtLength(progress * pathLen);
+
+          // Map SVG coords to container coords
+          const x = point.x * scaleX;
+          const y = point.y * scaleY;
+
+          icon.style.left = x + 'px';
+          icon.style.top = y + 'px';
+          icon.style.transform = 'translate(-50%, -50%)';
+          icon.style.opacity = '0.85';
+
+          requestAnimationFrame(step);
         }
-      );
+
+        requestAnimationFrame(step);
+      }
+
+      animateIcon();
     });
   }
 
@@ -132,19 +163,32 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ========== ABOUT SECTION ========== */
   reveal('.about__text > *', { y: 40 }, '.about', 0.15);
 
-  // Animate globe badges
-  gsap.fromTo('.about__globe-badge',
-    { opacity: 0, scale: 0.5 },
-    {
-      opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.7)',
-      stagger: 0.15,
-      scrollTrigger: {
-        trigger: '.about__visual',
-        start: 'top 80%',
-        toggleActions: 'play none none none'
+  // Animate about visual image reveal
+  const aboutVisual = document.querySelector('.about__visual');
+  if (aboutVisual) {
+    gsap.fromTo(aboutVisual,
+      { opacity: 0, scale: 0.95 },
+      {
+        opacity: 1, scale: 1, duration: 1, ease: 'power3.out',
+        scrollTrigger: {
+          trigger: aboutVisual,
+          start: 'top 80%',
+          toggleActions: 'play none none none'
+        }
       }
-    }
-  );
+    );
+    gsap.fromTo('.about__visual-tag',
+      { opacity: 0, y: 10 },
+      {
+        opacity: 1, y: 0, duration: 0.5, stagger: 0.1,
+        scrollTrigger: {
+          trigger: aboutVisual,
+          start: 'top 70%',
+          toggleActions: 'play none none none'
+        }
+      }
+    );
+  }
 
   reveal('.about__stat', { y: 30 }, '.about__stats', 0.2);
 
