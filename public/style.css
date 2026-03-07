@@ -987,7 +987,10 @@ ul, ol {
 /* City dots overlay */
 .geography__cities-overlay {
   position: absolute;
-  inset: 24px 0;
+  top: 24px;
+  bottom: 24px;
+  right: 0;
+  left: 20%;
   z-index: 3;
   pointer-events: none;
 }
