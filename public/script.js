@@ -482,6 +482,10 @@ document.addEventListener('DOMContentLoaded', () => {
     bottom: 0.95
   };
 
+  // Global horizontal correction: shifts all city markers to the right.
+  // ~56px is visually close to 1–2 cm on common desktop displays.
+  const CITY_DOTS_SHIFT_X_PX = 56;
+
   function positionCityDots() {
     const overlay = document.getElementById('citiesOverlay');
     if (!overlay) return;
@@ -526,8 +530,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const imgFracX = IMG_CHINA.left + fracX * (IMG_CHINA.right - IMG_CHINA.left);
       const imgFracY = IMG_CHINA.top + fracY * (IMG_CHINA.bottom - IMG_CHINA.top);
 
-      // Convert to pixel position within overlay
-      const pixelX = imgOffX + imgFracX * imgW;
+      // Convert to pixel position within overlay (+ global horizontal correction)
+      const pixelX = imgOffX + imgFracX * imgW + CITY_DOTS_SHIFT_X_PX;
       const pixelY = imgOffY + imgFracY * imgH;
 
       // Convert to percentage of overlay
