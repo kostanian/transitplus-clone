@@ -130,8 +130,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const iconState = Array.from(flowIcons).map((icon, i) => {
       const emoji = allIcons[i % allIcons.length];
       icon.textContent = emoji;
-      return { insideFlag: -1, currentEmoji: emoji };
+      return { insideFlag: -1, currentEmoji: emoji, prevX: null };
     });
+
+    // Icons that should be flipped when moving right (from RU→CN or CN→KZ)
+    const flippableIcons = ['🚛', '🛳️'];
 
     // Track glow state per flag
     const flagGlowCount = [0, 0, 0];
