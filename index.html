@@ -383,48 +383,111 @@
 
   <!-- ========== GEOGRAPHY ========== -->
   <section class="geography" id="geography">
-    <div class="geography__bg">
-      <img src="/images/map-bg.jpg" alt="Карта маршрутов" class="geography__bg-img" />
-      <div class="geography__overlay"></div>
-    </div>
     <div class="container geography__content">
       <p class="section-label section-label--light">География</p>
       <h2 class="section-title section-title--light">Работаем по всему <span class="text-accent">Китаю</span></h2>
       <p class="geography__desc">Доставка в Россию и Казахстан авиа, ж/д и морским транспортом. Собственные склады и представители в ключевых городах Китая.</p>
 
-      <div class="geography__cities">
-        <div class="geography__city">
-          <span class="geography__city-dot"></span>
-          <span>Гуанчжоу</span>
-        </div>
-        <div class="geography__city">
-          <span class="geography__city-dot"></span>
-          <span>Шэньчжэнь</span>
-        </div>
-        <div class="geography__city">
-          <span class="geography__city-dot"></span>
-          <span>Иу</span>
-        </div>
-        <div class="geography__city">
-          <span class="geography__city-dot"></span>
-          <span>Шанхай</span>
-        </div>
-        <div class="geography__city">
-          <span class="geography__city-dot"></span>
-          <span>Пекин</span>
-        </div>
-        <div class="geography__city">
-          <span class="geography__city-dot"></span>
-          <span>Нинбо</span>
-        </div>
-        <div class="geography__city">
-          <span class="geography__city-dot"></span>
-          <span>Циндао</span>
-        </div>
-        <div class="geography__city">
-          <span class="geography__city-dot"></span>
-          <span>Ханчжоу</span>
-        </div>
+      <div class="geography__map-wrapper">
+        <svg class="geography__svg-map" viewBox="0 0 800 700" xmlns="http://www.w3.org/2000/svg">
+          <!-- China outline (simplified) -->
+          <path class="china-outline" d="
+            M 230 80 L 310 50 L 400 30 L 480 40 L 560 60 L 620 50 L 680 80 L 720 120
+            L 740 180 L 750 240 L 730 300 L 740 350 L 720 400 L 700 430 L 720 470
+            L 700 510 L 660 540 L 620 560 L 580 600 L 520 620 L 460 640 L 400 650
+            L 340 630 L 300 600 L 260 560 L 220 530 L 180 500 L 150 450 L 130 400
+            L 110 350 L 100 300 L 110 250 L 130 200 L 160 150 L 200 110 Z
+          " />
+
+          <!-- Grid lines for tech feel -->
+          <line class="map-grid" x1="100" y1="200" x2="750" y2="200" />
+          <line class="map-grid" x1="100" y1="350" x2="750" y2="350" />
+          <line class="map-grid" x1="100" y1="500" x2="750" y2="500" />
+          <line class="map-grid" x1="250" y1="30" x2="250" y2="650" />
+          <line class="map-grid" x1="420" y1="30" x2="420" y2="650" />
+          <line class="map-grid" x1="600" y1="30" x2="600" y2="650" />
+
+          <!-- City markers -->
+          <!-- Beijing -->
+          <g class="city-marker" data-city="Пекин">
+            <circle class="city-pulse" cx="580" cy="140" r="16" />
+            <circle class="city-dot-svg" cx="580" cy="140" r="5" />
+            <g class="city-label" transform="translate(580, 140)">
+              <rect class="city-label-bg" x="12" y="-14" width="72" height="28" rx="6" />
+              <text class="city-label-text" x="48" y="4">Пекин</text>
+            </g>
+          </g>
+
+          <!-- Qingdao -->
+          <g class="city-marker" data-city="Циндао">
+            <circle class="city-pulse" cx="640" cy="220" r="16" />
+            <circle class="city-dot-svg" cx="640" cy="220" r="5" />
+            <g class="city-label" transform="translate(640, 220)">
+              <rect class="city-label-bg" x="12" y="-14" width="82" height="28" rx="6" />
+              <text class="city-label-text" x="53" y="4">Циндао</text>
+            </g>
+          </g>
+
+          <!-- Shanghai -->
+          <g class="city-marker" data-city="Шанхай">
+            <circle class="city-pulse" cx="660" cy="340" r="16" />
+            <circle class="city-dot-svg" cx="660" cy="340" r="5" />
+            <g class="city-label" transform="translate(660, 340)">
+              <rect class="city-label-bg" x="12" y="-14" width="86" height="28" rx="6" />
+              <text class="city-label-text" x="55" y="4">Шанхай</text>
+            </g>
+          </g>
+
+          <!-- Hangzhou -->
+          <g class="city-marker" data-city="Ханчжоу">
+            <circle class="city-pulse" cx="630" cy="390" r="16" />
+            <circle class="city-dot-svg" cx="630" cy="390" r="5" />
+            <g class="city-label" transform="translate(630, 390)">
+              <rect class="city-label-bg" x="12" y="-14" width="96" height="28" rx="6" />
+              <text class="city-label-text" x="60" y="4">Ханчжоу</text>
+            </g>
+          </g>
+
+          <!-- Ningbo -->
+          <g class="city-marker" data-city="Нинбо">
+            <circle class="city-pulse" cx="680" cy="380" r="16" />
+            <circle class="city-dot-svg" cx="680" cy="380" r="5" />
+            <g class="city-label" transform="translate(680, 380)">
+              <rect class="city-label-bg" x="-90" y="-14" width="78" height="28" rx="6" />
+              <text class="city-label-text" x="-51" y="4">Нинбо</text>
+            </g>
+          </g>
+
+          <!-- Yiwu -->
+          <g class="city-marker" data-city="Иу">
+            <circle class="city-pulse" cx="620" cy="420" r="16" />
+            <circle class="city-dot-svg" cx="620" cy="420" r="5" />
+            <g class="city-label" transform="translate(620, 420)">
+              <rect class="city-label-bg" x="12" y="-14" width="48" height="28" rx="6" />
+              <text class="city-label-text" x="36" y="4">Иу</text>
+            </g>
+          </g>
+
+          <!-- Guangzhou -->
+          <g class="city-marker" data-city="Гуанчжоу">
+            <circle class="city-pulse" cx="530" cy="540" r="16" />
+            <circle class="city-dot-svg" cx="530" cy="540" r="5" />
+            <g class="city-label" transform="translate(530, 540)">
+              <rect class="city-label-bg" x="12" y="-14" width="106" height="28" rx="6" />
+              <text class="city-label-text" x="65" y="4">Гуанчжоу</text>
+            </g>
+          </g>
+
+          <!-- Shenzhen -->
+          <g class="city-marker" data-city="Шэньчжэнь">
+            <circle class="city-pulse" cx="540" cy="580" r="16" />
+            <circle class="city-dot-svg" cx="540" cy="580" r="5" />
+            <g class="city-label" transform="translate(540, 580)">
+              <rect class="city-label-bg" x="12" y="-14" width="118" height="28" rx="6" />
+              <text class="city-label-text" x="71" y="4">Шэньчжэнь</text>
+            </g>
+          </g>
+        </svg>
       </div>
 
       <div class="geography__routes">
