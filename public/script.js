@@ -504,10 +504,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let imgW, imgH, imgOffX, imgOffY;
     if (containerRatio > imgRatio) {
-      // Container wider than image — image fits by height
+      // Container wider than image — image fits by height, aligned right
       imgH = containerH;
       imgW = containerH * imgRatio;
-      imgOffX = (containerW - imgW) / 2;
+      imgOffX = containerW - imgW; // right-aligned
       imgOffY = 0;
     } else {
       // Container taller than image — image fits by width
