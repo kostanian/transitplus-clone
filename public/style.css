@@ -962,13 +962,6 @@ ul, ol {
 .geography__content {
   position: relative;
   z-index: 2;
-  background: rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 20px;
-  padding: 48px 40px;
-  max-width: 640px;
 }
 
 .geography__desc {
