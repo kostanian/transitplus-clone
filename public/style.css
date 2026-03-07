@@ -972,13 +972,28 @@ ul, ol {
   margin-bottom: 48px;
 }
 
-.geography__map-bg {
+.geography__map-wrap {
   position: absolute;
   inset: 24px 0;
-  background: url('/images/map-bg.jpg') center center / contain no-repeat;
-  opacity: 0.55;
   z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   pointer-events: none;
+}
+
+.geography__map-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* City dots — positioned relative to the map wrapper */
+.geography__map-wrap {
+  position: absolute;
+  inset: 24px 0;
 }
 
 /* City dots overlay */
