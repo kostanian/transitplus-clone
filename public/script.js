@@ -197,7 +197,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const y = point.y * scaleY;
         icon.style.left = x + 'px';
         icon.style.top = y + 'px';
-        icon.style.transform = 'translate(-50%, -50%)';
+
+        // Flip 🚛 and 🛳️ when moving right (RU→CN or CN→KZ direction)
+        let rotation = '';
+        if (state.prevX !== null && flippableIcons.includes(state.currentEmoji)) {
+          const movingRight = point.x > state.prevX;
+          if (movingRight) {
+            rotation = ' scaleX(-1)';
+          }
+        }
+        state.prevX = point.x;
+        icon.style.transform = 'translate(-50%, -50%)' + rotation;
 
         requestAnimationFrame(step);
       }
