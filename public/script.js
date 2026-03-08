@@ -134,7 +134,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Icons that should be flipped when moving right (from RU→CN or CN→KZ)
-    const flippableIcons = ['🚛', '🛳️'];
+    const flippableRightIcons = ['🚛', '🛳️'];
+    const flippableLeftIcons = ['✈️'];
 
     // Track glow state per flag
     const flagGlowCount = [0, 0, 0];
