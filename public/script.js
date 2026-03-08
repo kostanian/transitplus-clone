@@ -198,16 +198,16 @@ document.addEventListener('DOMContentLoaded', () => {
         icon.style.left = x + 'px';
         icon.style.top = y + 'px';
 
-        // Flip 🚛 and 🛳️ when moving right (RU→CN or CN→KZ direction)
-        let rotation = '';
+        // Flip 🚛 and 🛳️ 180° when moving right (RU→CN or CN→KZ direction)
+        let flip = '';
         if (state.prevX !== null && flippableIcons.includes(state.currentEmoji)) {
           const movingRight = point.x > state.prevX;
           if (movingRight) {
-            rotation = ' scaleX(-1)';
+            flip = ' rotate(180deg)';
           }
         }
         state.prevX = point.x;
-        icon.style.transform = 'translate(-50%, -50%)' + rotation;
+        icon.style.transform = 'translate(-50%, -50%)' + flip;
 
         requestAnimationFrame(step);
       }
