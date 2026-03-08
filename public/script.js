@@ -134,7 +134,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Icons that should be flipped when moving right (from RU→CN or CN→KZ)
-    const flippableIcons = ['🚛', '🛳️'];
+    const flippableRightIcons = ['🚛', '🛳️'];
+    const flippableLeftIcons = ['✈️'];
 
     // Track glow state per flag
     const flagGlowCount = [0, 0, 0];
@@ -200,9 +201,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Flip 🚛 and 🛳️ 180° when moving right (RU→CN or CN→KZ direction)
         let flip = '';
-        if (state.prevX !== null && flippableIcons.includes(state.currentEmoji)) {
+        if (state.prevX !== null) {
           const movingRight = point.x > state.prevX;
-          if (movingRight) {
+          if (movingRight && flippableRightIcons.includes(state.currentEmoji)) {
+            flip = ' rotate(180deg)';
+          } else if (!movingRight && flippableLeftIcons.includes(state.currentEmoji)) {
             flip = ' rotate(180deg)';
           }
         }
